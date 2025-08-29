@@ -5,12 +5,12 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C9FFD4"
-    android:backgroundTint="#C9FFD4"
+    android:background="@color/background"
+    android:backgroundTint="@color/background"
     tools:context=".Onboard1Activity">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/backart1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -23,7 +23,7 @@
         app:srcCompat="@drawable/backart" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/onboard1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -35,13 +35,13 @@
         app:srcCompat="@drawable/img1" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/OnboardTitle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="173dp"
         android:layout_marginEnd="180dp"
-        android:text="Welcome to SmartAgro"
-        android:textColor="#0B0B0B"
+        android:text="@string/Onboard_Title1"
+        android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -52,15 +52,15 @@
         app:layout_constraintVertical_bias="0.636" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/OnboardDes1"
         android:layout_width="269dp"
         android:layout_height="53dp"
         android:foregroundGravity="center"
         android:gravity="center"
         android:maxLines="2"
         android:minLines="2"
-        android:text="Grow smarter, not harder.\nWelcome to the future with SmartAgro."
-        android:textColor="#101010"
+        android:text="@string/Onboard_Des1"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +68,7 @@
         app:layout_constraintVertical_bias="0.728" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/dot1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -89,27 +89,27 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/button4"
+            android:id="@+id/btnSkip1"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:backgroundTint="#C9FFD4"
-            android:text="SKIP"
-            android:textColor="#04AC58"
+            android:backgroundTint="@color/background"
+            android:text="@string/btn_skip"
+            android:textColor="@color/button"
             android:textSize="24sp"
             app:cornerRadius="8dp" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnNext1"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="5dp"
             android:layout_weight="1"
-            android:backgroundTint="#04AC58"
-            android:text="NEXT"
+            android:backgroundTint="@color/button"
+            android:text="@string/btn_next"
             android:textSize="24sp"
             app:cornerRadius="8dp" />
     </LinearLayout>

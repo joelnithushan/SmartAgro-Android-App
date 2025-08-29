@@ -5,12 +5,12 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C9FFD4"
-    android:backgroundTint="#C9FFD4"
+    android:background="@color/background"
+    android:backgroundTint="@color/background"
     tools:context=".ForgotPW4Activity">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_signup3"
+        android:id="@+id/btnLetsGo"
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="0dp"
         android:layout_height="56dp"
@@ -22,8 +22,8 @@
         android:fontFamily="sans-serif-medium"
         android:letterSpacing="0.02"
         android:stateListAnimator="@null"
-        android:text="Let's Go"
-        android:textColor="#FFFFFF"
+        android:text="@string/btn_letsgo"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
         app:backgroundTint="#04AC58"
@@ -33,7 +33,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.618"
-        app:rippleColor="#FFFFFF"
+        app:rippleColor="@color/white"
         app:strokeWidth="0dp" />
 
     <TextView
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:elevation="2dp"
         android:fontFamily="sans-serif-black"
-        android:text="Success"
+        android:text="@string/success"
         android:textColor="#1A1A1A"
         android:textSize="48sp"
         android:textStyle="bold"
@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Your account has been successfully recovered.\n\nWelcome back, buddy."
+        android:text="@string/forgot_des4"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

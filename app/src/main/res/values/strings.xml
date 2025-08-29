@@ -9,4 +9,45 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+
+
+    <string name="Land_Title">Grow Smart - Farm Smarter</string>
+    <string name="Land_Link">Already have an account? Sign-In</string>
+    <string name="btn_get_started">Get Started!</string>
+    <string name="Onboard_Title1">Welcome to SmartAgro</string>
+    <string name="Onboard_Des1">Grow smarter, not harder.\nWelcome to the future with SmartAgro.</string>
+    <string name="btn_skip">SKIP</string>
+    <string name="btn_next">NEXT</string>
+    <string name="Onboard_Title2">Real-time Farm Monitoring</string>
+    <string name="Onboard_Des2">Know your farm like never before.\nTrack soil, weather, and air – live, accurate, and\nalways connected.</string>
+    <string name="Onboard_Title3">Smarter Farming, Better Future</string>
+    <string name="Onboard_Des3">Every drop, every seed, every degree –\n Smart decisions grow great harvests.</string>
+    <string name="btn_letsgo">Let\'s Go</string>
+    <string name="signup_title">Create\naccount</string>
+    <string name="username">Username</string>
+    <string name="or">OR</string>
+    <string name="apple_title">Continue with Apple</string>
+    <string name="google_title">Continue with Google</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="pass_placeholder">Enter your password</string>
+    <string name="pass">Password</string>
+    <string name="email_placeholder">Enter your email</string>
+    <string name="email">Email</string>
+    <string name="login_title">Welcome\nback!</string>
+    <string name="btn_signin">Sign In</string>
+    <string name="login_link1">Don\'t have account?\nSign-up</string>
+    <string name="login_link2">Forgot password?</string>
+    <string name="btn_otp">SEND OTP</string>
+    <string name="forgot_title1">Forgot\npassword</string>
+    <string name="forgot_des1">Please enter you email to reset password</string>
+    <string name="verify_otp">VERIFY OTP</string>
+    <string name="forgot_des2">We sent a reset link to email. Enter 5 digit code that mentioned in the email.</string>
+    <string name="new_pass">New Password</string>
+    <string name="confirm_pass">Confirm Password</string>
+    <string name="btn_UpdatePass">Update Password</string>
+    <string name="forgot_title3">Reset\npassword</string>
+    <string name="forgot_des3">Your password has been successfully reset. Create a new password. Ensure it differs from previous ones for security</string>
+    <string name="success">Success</string>
+    <string name="forgot_des4">Your account has been successfully recovered.\n\nWelcome back, buddy.</string>
+
 </resources>

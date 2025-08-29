@@ -5,18 +5,18 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C9FFD4"
-    android:backgroundTint="#C9FFD4"
+    android:background="@color/background"
+    android:backgroundTint="@color/background"
     tools:context=".SignInActivity">
 
     <TextView
-        android:id="@+id/textView_welcome"
+        android:id="@+id/signupTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="2dp"
         android:fontFamily="sans-serif-black"
-        android:text="Create\naccount"
-        android:textColor="#1A1A1A"
+        android:text="@string/signup_title"
+        android:textColor="@color/black"
         android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textView_username_label"
@@ -26,7 +26,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.8" />
 
-    <!-- Username Label -->
+
     <TextView
         android:id="@+id/textView_username_label"
         android:layout_width="wrap_content"
@@ -35,14 +35,13 @@
         android:layout_marginBottom="8dp"
         android:fontFamily="sans-serif-medium"
         android:letterSpacing="0.01"
-        android:text="Username"
+        android:text="@string/username"
         android:textColor="#2A2A2A"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout_username"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Username Input Field -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout_username"
         android:layout_width="0dp"
@@ -52,10 +51,9 @@
         android:elevation="12dp"
         android:outlineProvider="bounds"
         app:boxBackgroundMode="outline"
-        app:boxBackgroundColor="#FFFFFF"
+        app:boxBackgroundColor="@color/white"
         app:boxStrokeColor="@color/black"
         app:boxStrokeWidth="2dp"
-        app:boxStrokeColorFocused="#04AC58"
         app:boxCornerRadiusBottomEnd="14dp"
         app:boxCornerRadiusBottomStart="14dp"
         app:boxCornerRadiusTopEnd="14dp"
@@ -88,7 +86,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="8dp"
-        android:text="Email"
+        android:text="@string/email"
         android:textColor="#2A2A2A"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -97,7 +95,6 @@
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout_email"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Email Input Field -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout_email"
         android:layout_width="0dp"
@@ -107,10 +104,9 @@
         android:elevation="12dp"
         android:outlineProvider="bounds"
         app:boxBackgroundMode="outline"
-        app:boxBackgroundColor="#FFFFFF"
+        app:boxBackgroundColor="@color/white"
         app:boxStrokeColor="@color/black"
         app:boxStrokeWidth="2dp"
-        app:boxStrokeColorFocused="#04AC58"
         app:boxCornerRadiusBottomEnd="14dp"
         app:boxCornerRadiusBottomStart="14dp"
         app:boxCornerRadiusTopEnd="14dp"
@@ -125,7 +121,7 @@
             android:id="@+id/editText_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your email"
+            android:hint="@string/email_placeholder"
             android:inputType="textEmailAddress"
             android:textColor="#0B0B0B"
             android:textColorHint="#888888"
@@ -136,14 +132,13 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Password Label -->
     <TextView
         android:id="@+id/textView_password_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
         android:layout_marginBottom="8dp"
-        android:text="Password"
+        android:text="@string/pass"
         android:textColor="#2A2A2A"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -152,7 +147,7 @@
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout_password"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Password Input Field -->
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout_password"
         android:layout_width="0dp"
@@ -161,19 +156,17 @@
         android:layout_marginBottom="24dp"
         android:elevation="12dp"
         android:outlineProvider="bounds"
-        app:boxBackgroundColor="#FFFFFF"
+        app:boxBackgroundColor="@color/white"
         app:boxBackgroundMode="outline"
         app:boxCornerRadiusBottomEnd="14dp"
         app:boxCornerRadiusBottomStart="14dp"
         app:boxCornerRadiusTopEnd="14dp"
         app:boxCornerRadiusTopStart="14dp"
         app:boxStrokeColor="@color/black"
-        app:boxStrokeColorFocused="#04AC58"
         app:boxStrokeWidth="2dp"
         app:hintAnimationEnabled="true"
         app:hintTextColor="#888888"
         app:passwordToggleEnabled="true"
-        app:passwordToggleDrawable="@drawable/ic_eye"
         app:passwordToggleTint="#666666"
         app:layout_constraintBottom_toTopOf="@+id/button_signup"
         app:layout_constraintEnd_toEndOf="parent"
@@ -184,7 +177,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-medium"
-            android:hint="Enter your password"
+            android:hint="@string/pass_placeholder"
             android:inputType="textPassword"
             android:paddingHorizontal="18dp"
             android:paddingVertical="18dp"
@@ -194,7 +187,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <!-- Sign Up Button -->
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_signup"
         style="@style/Widget.MaterialComponents.Button"
@@ -206,21 +199,18 @@
         android:fontFamily="sans-serif-medium"
         android:letterSpacing="0.02"
         android:stateListAnimator="@null"
-        android:text="Sign Up"
-        android:textColor="#FFFFFF"
+        android:text="@string/sign_up"
+        android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
         app:backgroundTint="#04AC58"
         app:cornerRadius="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:rippleColor="#FFFFFF"
+        app:rippleColor="@color/white"
         app:strokeWidth="0dp"
         tools:layout_editor_absoluteY="594dp" />
 
-    <!-- Sign In Links -->
-
-    <!-- OR Divider -->
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -236,12 +226,12 @@
 
         <!-- Google Sign-in Button -->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/button8"
+            android:id="@+id/btnGoogle"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="77dp"
             android:layout_marginBottom="12dp"
-            android:backgroundTint="#FFFFFF"
+            android:backgroundTint="@color/white"
             android:drawableLeft="@drawable/google"
             android:drawablePadding="16dp"
             android:elevation="4dp"
@@ -249,7 +239,7 @@
             android:letterSpacing="0.01"
             android:paddingStart="24dp"
             android:paddingEnd="24dp"
-            android:text="Continue with Google"
+            android:text="@string/google_title"
             android:textColor="#1F1F1F"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -259,9 +249,8 @@
             app:strokeColor="#E0E0E0"
             app:strokeWidth="1dp" />
 
-        <!-- Apple Sign-in Button -->
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/button10"
+            android:id="@+id/btnApple"
             style="@style/Widget.MaterialComponents.Button"
             android:layout_width="match_parent"
             android:layout_height="77dp"
@@ -273,17 +262,17 @@
             android:letterSpacing="0.01"
             android:paddingStart="24dp"
             android:paddingEnd="24dp"
-            android:text="Continue with Apple"
-            android:textColor="#FFFFFF"
+            android:text="@string/apple_title"
+            android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:backgroundTint="#000000"
+            app:backgroundTint="@color/black"
             app:cornerRadius="38dp"
             app:rippleColor="#333333" />
 
     </LinearLayout>
 
-    <!-- OR Divider -->
+
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="390dp"
@@ -298,25 +287,22 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.76">
 
-        <!-- Left line -->
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_weight="1"
             android:background="#CCCCCC" />
 
-        <!-- OR text -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:fontFamily="sans-serif-medium"
-            android:text="OR"
+            android:text="@string/or"
             android:textColor="#888888"
             android:textSize="14sp"
             android:textStyle="normal" />
 
-        <!-- Right line -->
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"

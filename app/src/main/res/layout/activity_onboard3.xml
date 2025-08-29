@@ -5,12 +5,12 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C9FFD4"
-    android:backgroundTint="#C9FFD4"
+    android:background="@color/background"
+    android:backgroundTint="@color/background"
     tools:context=".Onboard3Activity">
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/backart3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -22,7 +22,7 @@
         app:srcCompat="@drawable/backart" />
 
     <ImageView
-        android:id="@+id/imageView6"
+        android:id="@+id/onboard3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,11 +34,11 @@
         app:srcCompat="@drawable/img3" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/OnboardTitle3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Smarter Farming, Better Future"
-        android:textColor="#0B0B0B"
+        android:text="@string/Onboard_Title3"
+        android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -48,12 +48,12 @@
         app:layout_constraintVertical_bias="0.626" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/OnboardDes3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Every drop, every seed, every degree –\n  Smart decisions grow great harvests."
-        android:textColor="#121212"
+        android:text="@string/Onboard_Des3"
+        android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,7 +61,7 @@
         app:layout_constraintVertical_bias="0.723" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/dot3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -83,14 +83,14 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/btnLetsGo"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:backgroundTint="#04AC58"
-            android:text="Let's Go"
+            android:backgroundTint="@color/button"
+            android:text="@string/btn_letsgo"
             android:textSize="34sp"
             app:cornerRadius="8dp" />
 
