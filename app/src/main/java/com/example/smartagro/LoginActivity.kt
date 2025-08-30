@@ -1,6 +1,8 @@
 package com.example.smartagro
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -15,6 +17,18 @@ class LoginActivity : AppCompatActivity() {
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
+        }
+
+        val linkNavigate1: TextView = findViewById(R.id.loginLink1)
+        linkNavigate1.setOnClickListener {
+            val intent = Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+        }
+
+        val linkNavigate2: TextView = findViewById(R.id.loginLink2)
+        linkNavigate2.setOnClickListener {
+            val intent = Intent(this, ForgotPW1Activity::class.java)
+            startActivity(intent)
         }
     }
 }

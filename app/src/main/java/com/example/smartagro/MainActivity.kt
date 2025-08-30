@@ -3,6 +3,7 @@ package com.example.smartagro
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -19,9 +20,15 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        val btnNavigate: Button = findViewById(R.id.btnGetStarted)
+        val btnNavigate: Button = findViewById(R.id.btnGetstarted)
         btnNavigate.setOnClickListener {
             val intent = Intent(this, Onboard1Activity::class.java)
+            startActivity(intent)
+        }
+
+        val linkNavigate: TextView = findViewById(R.id.landLink)
+        linkNavigate.setOnClickListener {
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
     }

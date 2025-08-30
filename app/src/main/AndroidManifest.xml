@@ -33,7 +33,7 @@
             android:name=".ForgotPW1Activity"
             android:exported="false" />
         <activity
-            android:name=".SignInActivity"
+            android:name=".SignUpActivity"
             android:exported="false" />
         <activity
             android:name=".ui.login.LoginActivity2"
