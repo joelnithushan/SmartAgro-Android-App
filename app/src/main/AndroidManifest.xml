@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SmartAgro">
         <activity
+            android:name=".GuideActivity"
+            android:exported="false" />
+        <activity
             android:name=".IrrigationActivity"
             android:exported="false" />
         <activity

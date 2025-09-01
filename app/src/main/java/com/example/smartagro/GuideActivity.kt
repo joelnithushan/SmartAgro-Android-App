@@ -9,11 +9,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class ProfileActivity : AppCompatActivity() {
+class GuideActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_profile)
+        setContentView(R.layout.activity_guide)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -21,7 +21,7 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         setupBottomNavigation()
-        updateSelectedTab(R.id.nav_profile)
+        updateSelectedTab(R.id.nav_guide)
     }
 
     private fun setupBottomNavigation() {
@@ -48,13 +48,13 @@ class ProfileActivity : AppCompatActivity() {
 
         val navGuide: LinearLayout = findViewById(R.id.nav_guide)
         navGuide.setOnClickListener {
-            val intent = Intent(this, GuideActivity::class.java)
-            startActivity(intent)
             updateSelectedTab(R.id.nav_guide)
         }
 
         val navProfile: LinearLayout = findViewById(R.id.nav_profile)
         navProfile.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
             updateSelectedTab(R.id.nav_profile)
         }
     }
@@ -79,6 +79,6 @@ class ProfileActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        updateSelectedTab(R.id.nav_profile)
+        updateSelectedTab(R.id.nav_guide)
     }
 }
