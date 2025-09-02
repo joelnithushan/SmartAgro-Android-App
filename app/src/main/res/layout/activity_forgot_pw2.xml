@@ -90,6 +90,7 @@
             app:boxStrokeColor="#0B0B0B">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_otp1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="5dp"
@@ -114,6 +115,7 @@
             app:boxStrokeColor="#0B0B0B">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_otp2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="5dp"
@@ -137,6 +139,7 @@
             app:boxStrokeColor="#0B0B0B">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_otp3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="5dp"
@@ -160,6 +163,7 @@
             app:boxStrokeColor="#0B0B0B">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_otp4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="5dp"
@@ -183,6 +187,7 @@
             app:boxStrokeColor="#0B0B0B">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/editText_otp5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:elevation="5dp"

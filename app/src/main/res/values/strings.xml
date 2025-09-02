@@ -34,7 +34,7 @@
     <string name="email_placeholder">Enter your email</string>
     <string name="email">Email</string>
     <string name="login_title">Welcome\nback!</string>
-    <string name="btn_signin">Sign In</string>
+    <string name="btn_signin">Login</string>
     <string name="login_link1">Don\'t have account?\nSign-up</string>
     <string name="login_link2">Forgot password?</string>
     <string name="btn_otp">SEND OTP</string>
