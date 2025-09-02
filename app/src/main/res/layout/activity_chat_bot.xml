@@ -8,7 +8,6 @@
     android:background="#C9FFD4"
     tools:context=".ChatBotActivity">
 
-    <!-- Top Bar -->
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
@@ -24,14 +23,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Agri AI Chat"
+            android:text="@string/chatbot_title"
             android:textColor="@color/white"
             android:textSize="28sp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
-    <!-- Chat Messages Area -->
+
     <ScrollView
         android:id="@+id/chat_scroll_view"
         android:layout_width="match_parent"
@@ -51,7 +50,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Welcome Message -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -79,7 +78,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hello Joel, Welcome to SmartAgro AI!"
+                        android:text="@string/chatbot_chat1"
                         android:textColor="#333333"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -88,7 +87,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="How can I help you today?"
+                        android:text="@string/chatbot_chat2"
                         android:textColor="#666666"
                         android:textSize="14sp" />
 
@@ -96,7 +95,7 @@
 
             </LinearLayout>
 
-            <!-- Sample User Message -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -116,7 +115,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="What's the best time to water my tomatoes?"
+                        android:text="@string/chatbot_chat3"
                         android:textColor="@color/white"
                         android:textSize="14sp" />
 
@@ -133,7 +132,7 @@
 
             </LinearLayout>
 
-            <!-- Sample AI Response -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -160,7 +159,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="The best time to water tomatoes is early morning (6-8 AM) or late evening (6-8 PM). This helps prevent water evaporation and allows plants to absorb water efficiently."
+                        android:text="@string/chatbot_chat4"
                         android:textColor="#333333"
                         android:textSize="14sp" />
 
@@ -172,7 +171,7 @@
 
     </ScrollView>
 
-    <!-- Chat Input Container -->
+
     <LinearLayout
         android:id="@+id/chat_input_container"
         android:layout_width="match_parent"
@@ -194,7 +193,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
-            android:hint="Type your message..."
+            android:hint="@string/chatbot_label"
             android:maxLines="4"
             android:minHeight="48dp"
             android:padding="12dp"
@@ -214,7 +213,7 @@
 
     </LinearLayout>
 
-    <!-- Bottom Navigation Bar -->
+
     <LinearLayout
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -228,7 +227,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Dashboard -->
+
         <LinearLayout
             android:id="@+id/nav_dashboard"
             android:layout_width="0dp"
@@ -252,14 +251,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Dashboard"
+                android:text="@string/dash_nav_text"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <!-- Irrigation -->
+
         <LinearLayout
             android:id="@+id/nav_irrigation"
             android:layout_width="0dp"
@@ -283,14 +282,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Irrigation"
+                android:text="@string/irri_nav_text"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <!-- Chat Bot -->
+
         <LinearLayout
             android:id="@+id/nav_chatbot"
             android:layout_width="0dp"
@@ -314,14 +313,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Chat Bot"
+                android:text="@string/chatbot_nav_text"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <!-- Guide -->
+
         <LinearLayout
             android:id="@+id/nav_guide"
             android:layout_width="0dp"
@@ -345,14 +344,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Guide"
+                android:text="@string/guide_nav_text"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <!-- Profile -->
+
         <LinearLayout
             android:id="@+id/nav_profile"
             android:layout_width="0dp"
@@ -376,7 +375,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Profile"
+                android:text="@string/profile_nav_text"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />

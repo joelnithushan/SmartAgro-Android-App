@@ -1,13 +1,17 @@
 package com.example.smartagro
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.button.MaterialButton
 
 class ProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,6 +25,8 @@ class ProfileActivity : AppCompatActivity() {
         }
 
         setupBottomNavigation()
+        setupLogoutButton()
+        setupWhatsAppContact()
         updateSelectedTab(R.id.nav_profile)
     }
 
@@ -56,6 +62,64 @@ class ProfileActivity : AppCompatActivity() {
         val navProfile: LinearLayout = findViewById(R.id.nav_profile)
         navProfile.setOnClickListener {
             updateSelectedTab(R.id.nav_profile)
+        }
+    }
+
+    private fun setupLogoutButton() {
+        val logoutButton: MaterialButton = findViewById(R.id.button_signup8)
+        logoutButton.setOnClickListener {
+            showLogoutDialog()
+        }
+    }
+
+    private fun setupWhatsAppContact() {
+        val whatsappContact: LinearLayout = findViewById(R.id.whatsapp_contact)
+        whatsappContact.setOnClickListener {
+            openWhatsAppChat()
+        }
+    }
+
+    private fun showLogoutDialog() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Logout")
+        builder.setMessage("Are you sure you want to logout?")
+        builder.setPositiveButton("Yes") { _, _ ->
+            performLogout()
+        }
+        builder.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.dismiss()
+        }
+        builder.show()
+    }
+
+    private fun performLogout() {
+        // Clear any saved user data, preferences, tokens, etc.
+        // Example: Clear SharedPreferences
+        val sharedPref = getSharedPreferences("user_prefs", MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.clear()
+        editor.apply()
+
+        // Navigate to Login Activity
+        val intent = Intent(this, LoginActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
+        finish()
+
+        Toast.makeText(this, "Logged out successfully", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun openWhatsAppChat() {
+        val phoneNumber = "+94769423167" // Replace with your WhatsApp number
+        val message = "Hi, I need help with the Smart Agro app"
+
+        try {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("https://wa.me/$phoneNumber?text=${Uri.encode(message)}")
+            startActivity(intent)
+        } catch (e: Exception) {
+            // If WhatsApp is not installed, show a message
+            Toast.makeText(this, "WhatsApp is not installed on this device", Toast.LENGTH_SHORT).show()
         }
     }
 

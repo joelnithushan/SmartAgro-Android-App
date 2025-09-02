@@ -16,7 +16,7 @@
         android:backgroundTint="@color/background"
         android:orientation="vertical">
 
-        <!-- Header -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,14 +27,14 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Dashboard"
+                android:text="@string/dash_lable"
                 android:textColor="#ffffff"
                 android:textSize="28sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <!-- Sensor Cards Container -->
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="800dp"
@@ -80,7 +80,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Air Temperature"
+                            android:text="@string/airtemp"
                             android:textColor="@color/black"
                             android:textStyle="bold"
                             android:textSize="16sp" />
@@ -88,7 +88,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="29.3°C"
+                            android:text="@string/airtemp_val"
                             android:textColor="#4CAF50"
                             android:textSize="28sp"
                             android:textStyle="bold" />
@@ -128,7 +128,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Soil Mositure"
+                            android:text="@string/soilmoist"
                             android:textColor="@color/black"
                             android:textStyle="bold"
                             android:textSize="16sp" />
@@ -136,7 +136,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="42% (VWC)"
+                            android:text="@string/soilmoist_value"
                             android:textColor="#4CAF50"
                             android:textSize="28sp"
                             android:textStyle="bold" />
@@ -176,7 +176,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Soil Temperature"
+                            android:text="@string/soiltemp"
                             android:textColor="@color/black"
                             android:textStyle="bold"
                             android:textSize="16sp" />
@@ -184,7 +184,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="26.5°C"
+                            android:text="@string/soiltemp_value"
                             android:textColor="#4CAF50"
                             android:textSize="28sp"
                             android:textStyle="bold" />
@@ -224,7 +224,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Humidity"
+                            android:text="@string/humidity"
                             android:textColor="@color/black"
                             android:textStyle="bold"
                             android:textSize="16sp" />
@@ -232,7 +232,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="68% (RH)"
+                            android:text="@string/humidity_value"
                             android:textColor="#4CAF50"
                             android:textSize="28sp"
                             android:textStyle="bold" />
@@ -272,7 +272,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Soil pH Value"
+                            android:text="@string/soilph"
                             android:textColor="@color/black"
                             android:textStyle="bold"
                             android:textSize="16sp" />
@@ -280,7 +280,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="6.5 pH"
+                            android:text="@string/soilph_value"
                             android:textColor="#4CAF50"
                             android:textSize="28sp"
                             android:textStyle="bold" />
@@ -320,7 +320,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Air Quality"
+                            android:text="@string/airquality"
                             android:textColor="@color/black"
                             android:textStyle="bold"
                             android:textSize="16sp" />
@@ -328,7 +328,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="42 AQl"
+                            android:text="@string/airquality_value"
                             android:textColor="#4CAF50"
                             android:textSize="28sp"
                             android:textStyle="bold" />
@@ -368,7 +368,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="CO2 Level"
+                            android:text="@string/co2level"
                             android:textColor="@color/black"
                             android:textStyle="bold"
                             android:textSize="16sp" />
@@ -376,7 +376,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="430 ppm"
+                            android:text="@string/co2level_value"
                             android:textColor="#4CAF50"
                             android:textSize="28sp"
                             android:textStyle="bold" />
@@ -416,7 +416,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="NH3 Level"
+                            android:text="@string/nh3level"
                             android:textColor="@color/black"
                             android:textStyle="bold"
                             android:textSize="16sp" />
@@ -424,7 +424,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2.1 ppm"
+                            android:text="@string/nh3level_value"
                             android:textColor="#4CAF50"
                             android:textSize="28sp"
                             android:textStyle="bold" />
@@ -464,7 +464,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Nitrogen Level"
+                            android:text="@string/nlevel"
                             android:textColor="@color/black"
                             android:textStyle="bold"
                             android:textSize="16sp" />
@@ -472,7 +472,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="45 mg/kg"
+                            android:text="@string/nlevel_value"
                             android:textColor="#4CAF50"
                             android:textSize="28sp"
                             android:textStyle="bold" />
@@ -512,7 +512,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Prosperous Level"
+                            android:text="@string/plevel"
                             android:textColor="@color/black"
                             android:textStyle="bold"
                             android:textSize="16sp" />
@@ -520,7 +520,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="18 mg/kg"
+                            android:text="@string/plevel_value"
                             android:textColor="#4CAF50"
                             android:textSize="28sp"
                             android:textStyle="bold" />
@@ -560,7 +560,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Potassium Level"
+                            android:text="@string/klevel"
                             android:textColor="@color/black"
                             android:textStyle="bold"
                             android:textSize="16sp" />
@@ -568,7 +568,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="210 mg/kg"
+                            android:text="@string/klevel_value"
                             android:textColor="#4CAF50"
                             android:textSize="28sp"
                             android:textStyle="bold" />
@@ -608,7 +608,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Light Level"
+                            android:text="@string/lightlevel"
                             android:textColor="@color/black"
                             android:textStyle="bold"
                             android:textSize="16sp" />
@@ -616,7 +616,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="50%"
+                            android:text="@string/lightlevel_value"
                             android:textColor="#4CAF50"
                             android:textSize="28sp"
                             android:textStyle="bold" />
@@ -667,7 +667,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Water Level"
+                            android:text="@string/waterlevel"
                             android:textColor="@color/black"
                             android:textStyle="bold"
                             android:textSize="16sp" />
@@ -675,7 +675,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="63%"
+                            android:text="@string/waterlevel_value"
                             android:textColor="#4CAF50"
                             android:textSize="28sp"
                             android:textStyle="bold" />
@@ -704,7 +704,7 @@
 
         </ScrollView>
 
-        <!-- Bottom Navigation -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -714,7 +714,7 @@
             android:orientation="horizontal"
             android:paddingVertical="3dp">
 
-            <!-- Dashboard -->
+
             <LinearLayout
                 android:id="@+id/nav_dashboard"
                 android:layout_width="0dp"
@@ -738,14 +738,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Dashboard"
+                    android:text="@string/dash_nav_text"
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
 
-            <!-- Search -->
+
             <LinearLayout
                 android:id="@+id/nav_irrigation"
                 android:layout_width="0dp"
@@ -769,14 +769,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Irrigation"
+                    android:text="@string/irri_nav_text"
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
 
-            <!-- Favorites -->
+
             <LinearLayout
                 android:id="@+id/nav_chatbot"
                 android:layout_width="0dp"
@@ -800,14 +800,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Chat Bot"
+                    android:text="@string/chatbot_nav_text"
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
 
-            <!-- Notifications -->
+
             <LinearLayout
                 android:id="@+id/nav_guide"
                 android:layout_width="0dp"
@@ -831,14 +831,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Guide"
+                    android:text="@string/guide_nav_text"
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
 
-            <!-- Profile -->
+
             <LinearLayout
                 android:id="@+id/nav_profile"
                 android:layout_width="0dp"
@@ -862,7 +862,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:text="Profile"
+                    android:text="@string/profile_nav_text"
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     android:textStyle="bold" />

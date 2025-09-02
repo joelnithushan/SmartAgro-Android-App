@@ -8,7 +8,7 @@
     android:background="#C9FFD4"
     tools:context=".GuideActivity">
 
-    <!-- Top Bar -->
+
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
@@ -24,14 +24,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="IoT Setup Guide"
+            android:text="@string/guide_text1"
             android:textColor="@color/white"
             android:textSize="28sp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
-    <!-- Main Content ScrollView -->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Introduction Section -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:text="Welcome to SmartAgro Setup"
+                        android:text="@string/guide_text2"
                         android:textColor="#333333"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -84,14 +84,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="Follow these steps to build and connect your IoT irrigation system. This guide will help you create a smart farming solution with soil moisture monitoring and automated water control."
+                    android:text="@string/guide_text3"
                     android:textColor="#666666"
                     android:textSize="14sp"
                     android:lineSpacingMultiplier="1.2" />
 
             </LinearLayout>
 
-            <!-- Step 1: Hardware Requirements -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -123,7 +123,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:text="Hardware Requirements"
+                        android:text="@string/guide_text4"
                         android:textColor="#333333"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -134,7 +134,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Required Components:"
+                    android:text="@string/guide_text5"
                     android:textColor="#333333"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -143,7 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="• ESP32 or Arduino Uno microcontroller\n• Soil moisture sensor (Capacitive/Resistive)\n• Relay module (5V, 2-channel)\n• Water pump (12V DC)\n• Jumper wires and breadboard\n• 12V power supply\n• WiFi module (if using Arduino)"
+                    android:text="@string/guide_text6"
                     android:textColor="#666666"
                     android:textSize="14sp"
                     android:lineSpacingMultiplier="1.3" />
@@ -159,7 +159,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="💡"
+                        android:text="@string/guide_text7"
                         android:textSize="16sp" />
 
                     <TextView
@@ -167,7 +167,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:text="Estimated cost: 2000Rs-4000Rs"
+                        android:text="@string/guide_text8"
                         android:textColor="#2E7D32"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -176,7 +176,7 @@
 
             </LinearLayout>
 
-            <!-- Step 2: Circuit Diagram -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -198,7 +198,7 @@
                         android:background="@drawable/rounded_bg"
                         android:backgroundTint="#FF9800"
                         android:gravity="center"
-                        android:text="2"
+                        android:text="@string/guide_text9"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -208,7 +208,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:text="Circuit Connections"
+                        android:text="@string/guide_text10"
                         android:textColor="#333333"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -219,7 +219,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Wiring Instructions:"
+                    android:text="@string/guide_text11"
                     android:textColor="#333333"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -241,7 +241,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Soil Moisture Sensor:"
+                            android:text="@string/guide_text12"
                             android:textColor="#E65100"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -249,7 +249,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="VCC → 3.3V | GND → GND | Analog → A0"
+                            android:text="@string/guide_text13"
                             android:textColor="#666666"
                             android:textSize="13sp" />
 
@@ -266,7 +266,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Relay Module:"
+                            android:text="@string/guide_text14"
                             android:textColor="#1565C0"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -274,7 +274,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="VCC → 5V | GND → GND | IN1 → Digital Pin 7"
+                            android:text="@string/guide_text15"
                             android:textColor="#666666"
                             android:textSize="13sp" />
 
@@ -290,7 +290,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Water Pump:"
+                            android:text="@string/guide_text16"
                             android:textColor="#7B1FA2"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -298,7 +298,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Connect through relay (NO &amp; COM terminals)"
+                            android:text="@string/guide_text17"
                             android:textColor="#666666"
                             android:textSize="13sp" />
 
@@ -308,7 +308,7 @@
 
             </LinearLayout>
 
-            <!-- Step 3: Code Setup -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -340,7 +340,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:text="Programming &amp; Setup"
+                        android:text="@string/guide_text18"
                         android:textColor="#333333"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -351,7 +351,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Software Requirements:"
+                    android:text="@string/guide_text19"
                     android:textColor="#333333"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -360,7 +360,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="• Arduino IDE or PlatformIO\n• ESP32/Arduino WiFi libraries\n• HTTP client libraries\n• JSON parsing libraries"
+                    android:text="@string/guide_text20"
                     android:textColor="#666666"
                     android:textSize="14sp"
                     android:lineSpacingMultiplier="1.3" />
@@ -372,14 +372,14 @@
                     android:layout_marginTop="12dp"
                     android:background="@drawable/rounded_bg"
                     android:backgroundTint="#9C27B0"
-                    android:text="📥 Download Sample Code"
+                    android:text="@string/guide_text21"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
 
-            <!-- Step 4: WiFi Configuration -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -401,7 +401,7 @@
                         android:background="@drawable/rounded_bg"
                         android:backgroundTint="#2196F3"
                         android:gravity="center"
-                        android:text="4"
+                        android:text="@string/guide_text22"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -411,7 +411,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:text="WiFi &amp; App Connection"
+                        android:text="@string/guide_text23"
                         android:textColor="#333333"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -422,7 +422,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Connection Steps:"
+                    android:text="@string/guide_text24"
                     android:textColor="#333333"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -431,7 +431,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="1. Update WiFi credentials in code\n2. Upload code to your microcontroller\n3. Power on the device\n4. Device will connect to your network\n5. Note the device IP address from serial monitor"
+                    android:text="@string/guide_text25"
                     android:textColor="#666666"
                     android:textSize="14sp"
                     android:lineSpacingMultiplier="1.3" />
@@ -447,7 +447,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Device Configuration:"
+                        android:text="@string/guide_text26"
                         android:textColor="#333333"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -462,14 +462,14 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Device IP:"
+                            android:text="@string/guide_text27"
                             android:textColor="#666666"
                             android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="192.168.1.100"
+                            android:text="@string/guide_text28"
                             android:textColor="#2196F3"
                             android:textSize="14sp"
                             android:textStyle="bold" />
@@ -485,14 +485,14 @@
                     android:layout_marginTop="12dp"
                     android:background="@drawable/rounded_bg"
                     android:backgroundTint="#2196F3"
-                    android:text="🔗 Test Connection"
+                    android:text="@string/guide_text29"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
             </LinearLayout>
 
-            <!-- Step 5: Testing -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -514,7 +514,7 @@
                         android:background="@drawable/rounded_bg"
                         android:backgroundTint="#4CAF50"
                         android:gravity="center"
-                        android:text="5"
+                        android:text="@string/guide_text30"
                         android:textColor="@color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -524,7 +524,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:text="Testing &amp; Calibration"
+                        android:text="@string/guide_text31"
                         android:textColor="#333333"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -535,7 +535,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:text="Final Steps:"
+                    android:text="@string/guide_text32"
                     android:textColor="#333333"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -544,7 +544,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="• Test soil moisture readings\n• Calibrate sensor values (dry/wet)\n• Test pump operation manually\n• Set up automated thresholds\n• Monitor system for 24 hours"
+                    android:text="@string/guide_text33"
                     android:textColor="#666666"
                     android:textSize="14sp"
                     android:lineSpacingMultiplier="1.3" />
@@ -560,7 +560,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="✅"
+                        android:text="@string/guide_text34"
                         android:textSize="16sp" />
 
                     <TextView
@@ -568,7 +568,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
-                        android:text="Congratulations! Your smart irrigation system is ready!"
+                        android:text="@string/guide_text35"
                         android:textColor="#2E7D32"
                         android:textSize="14sp"
                         android:textStyle="bold" />
@@ -577,7 +577,7 @@
 
             </LinearLayout>
 
-            <!-- Troubleshooting Section -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -591,7 +591,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🔧 Need Help?"
+                    android:text="@string/guide_text36"
                     android:textColor="#E65100"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -600,7 +600,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Common issues and solutions available in troubleshooting guide. Contact support if you encounter any problems during setup."
+                    android:text="@string/guide_text37"
                     android:textColor="#BF360C"
                     android:textSize="14sp" />
 
@@ -611,7 +611,7 @@
                     android:layout_marginTop="12dp"
                     android:background="@drawable/rounded_bg"
                     android:backgroundTint="#FF9800"
-                    android:text="📞 Contact Support"
+                    android:text="@string/contact"
                     android:textColor="@color/white"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -622,7 +622,7 @@
 
     </ScrollView>
 
-    <!-- Bottom Navigation Bar -->
+
     <LinearLayout
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -636,7 +636,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Dashboard -->
+
         <LinearLayout
             android:id="@+id/nav_dashboard"
             android:layout_width="0dp"
@@ -660,14 +660,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Dashboard"
+                android:text="@string/dash_nav_text"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <!-- Irrigation -->
+
         <LinearLayout
             android:id="@+id/nav_irrigation"
             android:layout_width="0dp"
@@ -691,14 +691,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Irrigation"
+                android:text="@string/irri_nav_text"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <!-- Chat Bot -->
+
         <LinearLayout
             android:id="@+id/nav_chatbot"
             android:layout_width="0dp"
@@ -722,14 +722,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Chat Bot"
+                android:text="@string/chatbot_nav_text"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <!-- Guide (Active) -->
+
         <LinearLayout
             android:id="@+id/nav_guide"
             android:layout_width="0dp"
@@ -754,14 +754,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Guide"
+                android:text="@string/guide_nav_text"
                 android:textColor="#04AC58"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <!-- Profile -->
+
         <LinearLayout
             android:id="@+id/nav_profile"
             android:layout_width="0dp"
@@ -785,7 +785,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Profile"
+                android:text="@string/profile_nav_text"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />

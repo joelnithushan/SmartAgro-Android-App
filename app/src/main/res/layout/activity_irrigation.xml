@@ -8,7 +8,7 @@
     android:background="#C9FFD4"
     tools:context=".IrrigationActivity">
 
-    <!-- Top Bar -->
+
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
@@ -24,14 +24,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Smart Irrigation"
+            android:text="@string/irri_title"
             android:textColor="@color/white"
             android:textSize="28sp"
             android:textStyle="bold" />
 
     </LinearLayout>
 
-    <!-- Main Content ScrollView -->
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Auto Irrigation Mode Section -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:text="Auto Irrigation Mode"
+                        android:text="@string/irri_text1"
                         android:textColor="#333333"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -92,11 +92,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="System automatically controls irrigation based on soil moisture and schedule"
+                    android:text="@string/irri_text2"
                     android:textColor="#666666"
                     android:textSize="14sp" />
 
-                <!-- Soil Moisture Display -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Soil Moisture Level"
+                            android:text="@string/irri_text3"
                             android:textColor="#666666"
                             android:textSize="14sp" />
 
@@ -129,7 +129,7 @@
                             android:id="@+id/soil_moisture_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="45%"
+                            android:text="@string/irri_text4"
                             android:textColor="#4CAF50"
                             android:textSize="24sp"
                             android:textStyle="bold" />
@@ -148,7 +148,7 @@
 
                 </LinearLayout>
 
-                <!-- Auto Threshold Setting -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -160,7 +160,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Auto Start when below:"
+                        android:text="@string/irri_text5"
                         android:textColor="#333333"
                         android:textSize="16sp" />
 
@@ -169,19 +169,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:text="30%"
+                        android:text="@string/irri_text6"
                         android:textColor="#04AC58"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 
                 </LinearLayout>
 
-                <!-- Schedule Section -->
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="Irrigation Schedule"
+                    android:text="@string/irri_text7"
                     android:textColor="#333333"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -204,14 +204,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Morning"
+                            android:text="@string/irri_text8"
                             android:textColor="#666666"
                             android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="06:00 AM"
+                            android:text="@string/irri_text9"
                             android:textColor="#333333"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -231,14 +231,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Evening"
+                            android:text="@string/irri_text10"
                             android:textColor="#666666"
                             android:textSize="14sp" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="06:00 PM"
+                            android:text="@string/irri_text11"
                             android:textColor="#333333"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -249,7 +249,7 @@
 
             </LinearLayout>
 
-            <!-- Manual Irrigation Mode Section -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -276,7 +276,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:text="Manual Irrigation Mode"
+                        android:text="@string/irri_text12"
                         android:textColor="#333333"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -295,16 +295,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="Manually control water pumps and irrigation timing"
+                    android:text="@string/irri_text13"
                     android:textColor="#666666"
                     android:textSize="14sp" />
 
-                <!-- Water Pump Controls -->
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:text="Water Pump Control"
+                    android:text="@string/irri_text14"
                     android:textColor="#333333"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -315,7 +315,7 @@
                     android:layout_marginTop="16dp"
                     android:orientation="horizontal">
 
-                    <!-- Pump 1 -->
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -328,7 +328,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Pump 1"
+                            android:text="@string/irri_text15"
                             android:textColor="#333333"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -337,7 +337,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Status: OFF"
+                            android:text="@string/irri_text16"
                             android:textColor="#666666"
                             android:textSize="12sp" />
 
@@ -348,13 +348,13 @@
                             android:layout_marginTop="8dp"
                             android:background="@drawable/rounded_bg"
                             android:backgroundTint="#04AC58"
-                            android:text="Turn ON"
+                            android:text="@string/irri_text17"
                             android:textColor="@color/white"
                             android:textSize="12sp" />
 
                     </LinearLayout>
 
-                    <!-- Pump 2 -->
+
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -368,7 +368,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Pump 2"
+                            android:text="@string/irri_text18"
                             android:textColor="#333333"
                             android:textSize="16sp"
                             android:textStyle="bold" />
@@ -377,7 +377,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:text="Status: OFF"
+                            android:text="@string/irri_text19"
                             android:textColor="#666666"
                             android:textSize="12sp" />
 
@@ -388,7 +388,7 @@
                             android:layout_marginTop="8dp"
                             android:background="@drawable/rounded_bg"
                             android:backgroundTint="#04AC58"
-                            android:text="Turn ON"
+                            android:text="@string/irri_text20"
                             android:textColor="@color/white"
                             android:textSize="12sp" />
 
@@ -396,7 +396,7 @@
 
                 </LinearLayout>
 
-                <!-- Duration Setting -->
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -408,7 +408,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Duration:"
+                        android:text="@string/irri_text21"
                         android:textColor="#333333"
                         android:textSize="16sp" />
 
@@ -417,7 +417,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
-                        android:text="30 minutes"
+                        android:text="@string/irri_text22"
                         android:textColor="#FF9800"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -426,7 +426,7 @@
 
             </LinearLayout>
 
-            <!-- System Status -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -449,7 +449,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:layout_weight="1"
-                    android:text="System Status: Active"
+                    android:text="@string/irri_text23"
                     android:textColor="#2E7D32"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -457,7 +457,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Last watered: 2 hours ago"
+                    android:text="@string/irri_text24"
                     android:textColor="#4CAF50"
                     android:textSize="12sp" />
 
@@ -467,7 +467,7 @@
 
     </ScrollView>
 
-    <!-- Bottom Navigation Bar -->
+
     <LinearLayout
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
@@ -481,7 +481,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- Dashboard -->
+
         <LinearLayout
             android:id="@+id/nav_dashboard"
             android:layout_width="0dp"
@@ -505,14 +505,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Dashboard"
+                android:text="@string/dash_nav_text"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <!-- Irrigation (Active) -->
+
         <LinearLayout
             android:id="@+id/nav_irrigation"
             android:layout_width="0dp"
@@ -537,14 +537,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Irrigation"
+                android:text="@string/irri_nav_text"
                 android:textColor="#04AC58"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <!-- Chat Bot -->
+
         <LinearLayout
             android:id="@+id/nav_chatbot"
             android:layout_width="0dp"
@@ -568,14 +568,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Chat Bot"
+                android:text="@string/chatbot_nav_text"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <!-- Guide -->
+
         <LinearLayout
             android:id="@+id/nav_guide"
             android:layout_width="0dp"
@@ -599,14 +599,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Guide"
+                android:text="@string/guide_nav_text"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <!-- Profile -->
+
         <LinearLayout
             android:id="@+id/nav_profile"
             android:layout_width="0dp"
@@ -630,7 +630,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Profile"
+                android:text="@string/profile_nav_text"
                 android:textColor="@color/black"
                 android:textSize="12sp"
                 android:textStyle="bold" />

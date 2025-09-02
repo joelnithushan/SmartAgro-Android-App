@@ -182,7 +182,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <!-- Email Label -->
+
 
 
     <com.google.android.material.button.MaterialButton
@@ -223,7 +223,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Google Sign-in Button -->
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGoogle"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
