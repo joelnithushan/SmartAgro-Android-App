@@ -66,7 +66,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun setupLogoutButton() {
-        val logoutButton: MaterialButton = findViewById(R.id.button_signup8)
+        val logoutButton: MaterialButton = findViewById(R.id.btnLogout)
         logoutButton.setOnClickListener {
             showLogoutDialog()
         }
@@ -107,7 +107,7 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun openWhatsAppChat() {
-        val phoneNumber = "+94769423167" // Replace with your WhatsApp number
+        val phoneNumber = "+94769423167"
         val message = "Hi, I need help with the Smart Agro app"
 
         try {
@@ -115,7 +115,7 @@ class ProfileActivity : AppCompatActivity() {
             intent.data = Uri.parse("https://wa.me/$phoneNumber?text=${Uri.encode(message)}")
             startActivity(intent)
         } catch (e: Exception) {
-            // If WhatsApp is not installed, show a message
+
             Toast.makeText(this, "WhatsApp is not installed on this device", Toast.LENGTH_SHORT).show()
         }
     }
