@@ -2,7 +2,6 @@ package com.example.smartagro
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Patterns
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -31,15 +30,11 @@ class ForgotPW1Activity : AppCompatActivity() {
 
         initViews()
 
-
         sendOtpButton.setOnClickListener {
-            if (validateEmail()) {
+            Toast.makeText(this, "OTP sent to your email!", Toast.LENGTH_SHORT).show()
 
-                Toast.makeText(this, "OTP sent to your email!", Toast.LENGTH_SHORT).show()
-
-                val intent = Intent(this, ForgotPW2Activity::class.java)
-                startActivity(intent)
-            }
+            val intent = Intent(this, ForgotPW2Activity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -47,22 +42,5 @@ class ForgotPW1Activity : AppCompatActivity() {
         emailEditText = findViewById(R.id.editText_email)
         emailInputLayout = findViewById(R.id.textInputLayout_email)
         sendOtpButton = findViewById(R.id.btnOTP1)
-    }
-
-    private fun validateEmail(): Boolean {
-
-        emailInputLayout.error = null
-
-        val email = emailEditText.text.toString().trim()
-
-        if (email.isEmpty()) {
-            emailInputLayout.error = "Email is required"
-            return false
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            emailInputLayout.error = "Please enter a valid email address"
-            return false
-        }
-
-        return true
     }
 }

@@ -14,7 +14,6 @@ import com.google.android.material.textfield.TextInputEditText
 
 class ForgotPW2Activity : AppCompatActivity() {
 
-    // UI components for OTP input fields
     private lateinit var otpField1: TextInputEditText
     private lateinit var otpField2: TextInputEditText
     private lateinit var otpField3: TextInputEditText
@@ -33,37 +32,20 @@ class ForgotPW2Activity : AppCompatActivity() {
             insets
         }
 
-        // Initialize UI components
         initViews()
-
-        // Set up OTP input behavior
         setupOtpInputs()
 
-        // Set click listener for verify button
         verifyButton.setOnClickListener {
-            if (validateOtp()) {
-                // Show success toast
-                Toast.makeText(this, "OTP Verified Successfully!", Toast.LENGTH_SHORT).show()
-
-                // Navigate to ForgotPW3Activity
-                val intent = Intent(this, ForgotPW3Activity::class.java)
-                startActivity(intent)
-                finish()
-            }
+            Toast.makeText(this, "OTP Verified Successfully!", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, ForgotPW3Activity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
     private fun initViews() {
-        // Note: You need to add these IDs to your XML TextInputEditText fields
-        // otpField1 = findViewById(R.id.editText_otp1)
-        // otpField2 = findViewById(R.id.editText_otp2)
-        // otpField3 = findViewById(R.id.editText_otp3)
-        // otpField4 = findViewById(R.id.editText_otp4)
-        // otpField5 = findViewById(R.id.editText_otp5)
-
         verifyButton = findViewById(R.id.btnOTP2)
 
-        // Temporary solution - you'll need to add IDs to XML first
         try {
             otpField1 = findViewById(R.id.editText_otp1)
             otpField2 = findViewById(R.id.editText_otp2)
@@ -76,7 +58,6 @@ class ForgotPW2Activity : AppCompatActivity() {
     }
 
     private fun setupOtpInputs() {
-        // Auto-focus next field when current field is filled
         try {
             otpField1.addTextChangedListener(createOtpTextWatcher(otpField1, otpField2))
             otpField2.addTextChangedListener(createOtpTextWatcher(otpField2, otpField3))
@@ -84,7 +65,6 @@ class ForgotPW2Activity : AppCompatActivity() {
             otpField4.addTextChangedListener(createOtpTextWatcher(otpField4, otpField5))
             otpField5.addTextChangedListener(createOtpTextWatcher(otpField5, null))
         } catch (e: Exception) {
-            // Handle case where IDs are not yet added to XML
         }
     }
 
@@ -99,34 +79,6 @@ class ForgotPW2Activity : AppCompatActivity() {
                     nextField?.requestFocus()
                 }
             }
-        }
-    }
-
-    private fun validateOtp(): Boolean {
-        try {
-            val otp1 = otpField1.text.toString().trim()
-            val otp2 = otpField2.text.toString().trim()
-            val otp3 = otpField3.text.toString().trim()
-            val otp4 = otpField4.text.toString().trim()
-            val otp5 = otpField5.text.toString().trim()
-
-            // Check if all fields are filled
-            if (otp1.isEmpty() || otp2.isEmpty() || otp3.isEmpty() || otp4.isEmpty() || otp5.isEmpty()) {
-                Toast.makeText(this, "Please enter complete OTP", Toast.LENGTH_SHORT).show()
-                return false
-            }
-
-            // Check if all fields contain only digits
-            val otpCode = otp1 + otp2 + otp3 + otp4 + otp5
-            if (!otpCode.all { it.isDigit() }) {
-                Toast.makeText(this, "OTP should contain only numbers", Toast.LENGTH_SHORT).show()
-                return false
-            }
-
-            return true
-        } catch (e: Exception) {
-            Toast.makeText(this, "Please complete XML setup first", Toast.LENGTH_SHORT).show()
-            return false
         }
     }
 }

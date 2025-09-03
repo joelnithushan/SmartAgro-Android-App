@@ -13,7 +13,6 @@ import com.google.android.material.textfield.TextInputLayout
 
 class ForgotPW3Activity : AppCompatActivity() {
 
-    // UI components
     private lateinit var newPasswordEditText: TextInputEditText
     private lateinit var confirmPasswordEditText: TextInputEditText
     private lateinit var newPasswordInputLayout: TextInputLayout
@@ -31,20 +30,14 @@ class ForgotPW3Activity : AppCompatActivity() {
             insets
         }
 
-        // Initialize UI components
         initViews()
 
-        // Set click listener for update password button
         updatePasswordButton.setOnClickListener {
-            if (validatePasswords()) {
-                // Show success toast
-                Toast.makeText(this, "Password Updated Successfully!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Password Updated Successfully!", Toast.LENGTH_SHORT).show()
 
-                // Navigate to ForgotPW4Activity
-                val intent = Intent(this, ForgotPW4Activity::class.java)
-                startActivity(intent)
-                finish()
-            }
+            val intent = Intent(this, ForgotPW4Activity::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
@@ -54,37 +47,5 @@ class ForgotPW3Activity : AppCompatActivity() {
         newPasswordInputLayout = findViewById(R.id.passInput1)
         confirmPasswordInputLayout = findViewById(R.id.textInputLayout_password)
         updatePasswordButton = findViewById(R.id.button_signup4)
-    }
-
-    private fun validatePasswords(): Boolean {
-        var isValid = true
-
-        // Clear previous errors
-        newPasswordInputLayout.error = null
-        confirmPasswordInputLayout.error = null
-
-        // Get input values
-        val newPassword = newPasswordEditText.text.toString().trim()
-        val confirmPassword = confirmPasswordEditText.text.toString().trim()
-
-        // Validate new password
-        if (newPassword.isEmpty()) {
-            newPasswordInputLayout.error = "New password is required"
-            isValid = false
-        } else if (newPassword.length < 6) {
-            newPasswordInputLayout.error = "Password must be at least 6 characters"
-            isValid = false
-        }
-
-        // Validate confirm password
-        if (confirmPassword.isEmpty()) {
-            confirmPasswordInputLayout.error = "Please confirm your password"
-            isValid = false
-        } else if (newPassword != confirmPassword) {
-            confirmPasswordInputLayout.error = "Passwords do not match"
-            isValid = false
-        }
-
-        return isValid
     }
 }
