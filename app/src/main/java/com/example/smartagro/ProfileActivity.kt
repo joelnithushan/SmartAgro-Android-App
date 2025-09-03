@@ -93,14 +93,11 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun performLogout() {
-        // Clear any saved user data, preferences, tokens, etc.
-        // Example: Clear SharedPreferences
         val sharedPref = getSharedPreferences("user_prefs", MODE_PRIVATE)
         val editor = sharedPref.edit()
         editor.clear()
         editor.apply()
 
-        // Navigate to Login Activity
         val intent = Intent(this, LoginActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)

@@ -20,7 +20,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#04AC58"
+            android:background="@color/title_bar"
             android:orientation="vertical"
             android:padding="20dp">
 
@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/dash_lable"
-                android:textColor="#ffffff"
+                android:textColor="@color/white"
                 android:textSize="28sp"
                 android:textStyle="bold" />
 
@@ -62,7 +62,7 @@
                         android:layout_width="8dp"
                         android:layout_height="100dp"
                         android:layout_marginStart="0dp"
-                        android:background="#4CAF50" />
+                        android:background="@color/dash_views" />
 
                     <ImageView
                         android:layout_width="56dp"
@@ -89,7 +89,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/airtemp_val"
-                            android:textColor="#4CAF50"
+                            android:textColor="@color/dash_views"
                             android:textSize="28sp"
                             android:textStyle="bold" />
 
@@ -110,7 +110,7 @@
                         android:layout_width="8dp"
                         android:layout_height="100dp"
                         android:layout_marginStart="0dp"
-                        android:background="#4CAF50" />
+                        android:background="@color/dash_views" />
 
                     <ImageView
                         android:layout_width="56dp"
@@ -137,7 +137,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/soilmoist_value"
-                            android:textColor="#4CAF50"
+                            android:textColor="@color/dash_views"
                             android:textSize="28sp"
                             android:textStyle="bold" />
 
@@ -158,7 +158,7 @@
                         android:layout_width="8dp"
                         android:layout_height="100dp"
                         android:layout_marginStart="0dp"
-                        android:background="#4CAF50" />
+                        android:background="@color/dash_views" />
 
                     <ImageView
                         android:layout_width="56dp"
@@ -185,7 +185,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/soiltemp_value"
-                            android:textColor="#4CAF50"
+                            android:textColor="@color/dash_views"
                             android:textSize="28sp"
                             android:textStyle="bold" />
 
@@ -206,7 +206,7 @@
                         android:layout_width="8dp"
                         android:layout_height="100dp"
                         android:layout_marginStart="0dp"
-                        android:background="#4CAF50" />
+                        android:background="@color/dash_views" />
 
                     <ImageView
                         android:layout_width="56dp"
@@ -233,7 +233,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/humidity_value"
-                            android:textColor="#4CAF50"
+                            android:textColor="@color/dash_views"
                             android:textSize="28sp"
                             android:textStyle="bold" />
 
@@ -254,7 +254,7 @@
                         android:layout_width="8dp"
                         android:layout_height="100dp"
                         android:layout_marginStart="0dp"
-                        android:background="#4CAF50" />
+                        android:background="@color/dash_views" />
 
                     <ImageView
                         android:layout_width="56dp"
@@ -281,7 +281,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/soilph_value"
-                            android:textColor="#4CAF50"
+                            android:textColor="@color/dash_views"
                             android:textSize="28sp"
                             android:textStyle="bold" />
 
@@ -302,7 +302,7 @@
                         android:layout_width="8dp"
                         android:layout_height="100dp"
                         android:layout_marginStart="0dp"
-                        android:background="#4CAF50" />
+                        android:background="@color/dash_views" />
 
                     <ImageView
                         android:layout_width="56dp"
@@ -329,7 +329,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/airquality_value"
-                            android:textColor="#4CAF50"
+                            android:textColor="@color/dash_views"
                             android:textSize="28sp"
                             android:textStyle="bold" />
 
@@ -350,7 +350,7 @@
                         android:layout_width="8dp"
                         android:layout_height="100dp"
                         android:layout_marginStart="0dp"
-                        android:background="#4CAF50" />
+                        android:background="@color/dash_views" />
 
                     <ImageView
                         android:layout_width="56dp"
@@ -377,7 +377,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/co2level_value"
-                            android:textColor="#4CAF50"
+                            android:textColor="@color/dash_views"
                             android:textSize="28sp"
                             android:textStyle="bold" />
 
@@ -398,7 +398,7 @@
                         android:layout_width="8dp"
                         android:layout_height="100dp"
                         android:layout_marginStart="0dp"
-                        android:background="#4CAF50" />
+                        android:background="@color/dash_views" />
 
                     <ImageView
                         android:layout_width="56dp"
@@ -425,7 +425,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/nh3level_value"
-                            android:textColor="#4CAF50"
+                            android:textColor="@color/dash_views"
                             android:textSize="28sp"
                             android:textStyle="bold" />
 
@@ -446,7 +446,7 @@
                         android:layout_width="8dp"
                         android:layout_height="100dp"
                         android:layout_marginStart="0dp"
-                        android:background="#4CAF50" />
+                        android:background="@color/dash_views" />
 
                     <ImageView
                         android:layout_width="56dp"
@@ -473,7 +473,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/nlevel_value"
-                            android:textColor="#4CAF50"
+                            android:textColor="@color/dash_views"
                             android:textSize="28sp"
                             android:textStyle="bold" />
 
@@ -494,7 +494,7 @@
                         android:layout_width="8dp"
                         android:layout_height="100dp"
                         android:layout_marginStart="0dp"
-                        android:background="#4CAF50" />
+                        android:background="@color/dash_views" />
 
                     <ImageView
                         android:layout_width="56dp"
@@ -521,7 +521,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/plevel_value"
-                            android:textColor="#4CAF50"
+                            android:textColor="@color/dash_views"
                             android:textSize="28sp"
                             android:textStyle="bold" />
 
@@ -542,7 +542,7 @@
                         android:layout_width="8dp"
                         android:layout_height="100dp"
                         android:layout_marginStart="0dp"
-                        android:background="#4CAF50" />
+                        android:background="@color/dash_views" />
 
                     <ImageView
                         android:layout_width="56dp"
@@ -569,7 +569,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/klevel_value"
-                            android:textColor="#4CAF50"
+                            android:textColor="@color/dash_views"
                             android:textSize="28sp"
                             android:textStyle="bold" />
 
@@ -590,7 +590,7 @@
                         android:layout_width="8dp"
                         android:layout_height="100dp"
                         android:layout_marginStart="0dp"
-                        android:background="#4CAF50" />
+                        android:background="@color/dash_views" />
 
                     <ImageView
                         android:layout_width="56dp"
@@ -617,7 +617,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/lightlevel_value"
-                            android:textColor="#4CAF50"
+                            android:textColor="@color/dash_views"
                             android:textSize="28sp"
                             android:textStyle="bold" />
 
@@ -649,7 +649,7 @@
                         android:layout_width="8dp"
                         android:layout_height="100dp"
                         android:layout_marginStart="0dp"
-                        android:background="#4CAF50" />
+                        android:background="@color/dash_views" />
 
                     <ImageView
                         android:layout_width="56dp"
@@ -676,7 +676,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/waterlevel_value"
-                            android:textColor="#4CAF50"
+                            android:textColor="@color/dash_views"
                             android:textSize="28sp"
                             android:textStyle="bold" />
 
@@ -708,7 +708,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#ffffff"
+            android:background="@color/white"
             android:elevation="8dp"
             android:gravity="center"
             android:orientation="horizontal"

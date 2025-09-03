@@ -13,7 +13,7 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="#04AC58"
+        android:background="@color/title_bar"
         android:orientation="vertical"
         android:padding="20dp"
         android:gravity="center_vertical"
@@ -66,7 +66,7 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:src="@drawable/guide_small"
-                        android:tint="#04AC58" />
+                        android:tint="@color/title_bar" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -74,7 +74,7 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:text="@string/guide_text2"
-                        android:textColor="#333333"
+                        android:textColor="@color/text_color99"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
@@ -85,7 +85,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="@string/guide_text3"
-                    android:textColor="#666666"
+                    android:textColor="@color/text_color66"
                     android:textSize="14sp"
                     android:lineSpacingMultiplier="1.2" />
 
@@ -111,7 +111,7 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:background="@drawable/rounded_bg"
-                        android:backgroundTint="#04AC58"
+                        android:backgroundTint="@color/title_bar"
                         android:gravity="center"
                         android:text="1"
                         android:textColor="@color/white"
@@ -124,7 +124,7 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:text="@string/guide_text4"
-                        android:textColor="#333333"
+                        android:textColor="@color/text_color99"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -135,7 +135,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/guide_text5"
-                    android:textColor="#333333"
+                    android:textColor="@color/text_color99"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -144,7 +144,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="@string/guide_text6"
-                    android:textColor="#666666"
+                    android:textColor="@color/text_color66"
                     android:textSize="14sp"
                     android:lineSpacingMultiplier="1.3" />
 
@@ -168,7 +168,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
                         android:text="@string/guide_text8"
-                        android:textColor="#2E7D32"
+                        android:textColor="@color/text_color26"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -196,7 +196,7 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:background="@drawable/rounded_bg"
-                        android:backgroundTint="#04AC58"
+                        android:backgroundTint="@color/title_bar"
                         android:gravity="center"
                         android:text="@string/guide_text9"
                         android:textColor="@color/white"
@@ -209,7 +209,7 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:text="@string/guide_text10"
-                        android:textColor="#333333"
+                        android:textColor="@color/text_color99"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -220,7 +220,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/guide_text11"
-                    android:textColor="#333333"
+                    android:textColor="@color/text_color99"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -250,7 +250,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/guide_text13"
-                            android:textColor="#666666"
+                            android:textColor="@color/text_color66"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -275,7 +275,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/guide_text15"
-                            android:textColor="#666666"
+                            android:textColor="@color/text_color66"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -299,7 +299,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/guide_text17"
-                            android:textColor="#666666"
+                            android:textColor="@color/text_color66"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -328,7 +328,7 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:background="@drawable/rounded_bg"
-                        android:backgroundTint="#04AC58"
+                        android:backgroundTint="@color/title_bar"
                         android:gravity="center"
                         android:text="3"
                         android:textColor="@color/white"
@@ -341,7 +341,7 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:text="@string/guide_text18"
-                        android:textColor="#333333"
+                        android:textColor="@color/text_color99"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -352,7 +352,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/guide_text19"
-                    android:textColor="#333333"
+                    android:textColor="@color/text_color99"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -361,7 +361,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="@string/guide_text20"
-                    android:textColor="#666666"
+                    android:textColor="@color/text_color66"
                     android:textSize="14sp"
                     android:lineSpacingMultiplier="1.3" />
 
@@ -398,7 +398,7 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:background="@drawable/rounded_bg"
-                        android:backgroundTint="#04AC58"
+                        android:backgroundTint="@color/title_bar"
                         android:gravity="center"
                         android:text="@string/guide_text22"
                         android:textColor="@color/white"
@@ -411,7 +411,7 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:text="@string/guide_text23"
-                        android:textColor="#333333"
+                        android:textColor="@color/text_color99"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -422,7 +422,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/guide_text24"
-                    android:textColor="#333333"
+                    android:textColor="@color/text_color99"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -432,14 +432,14 @@
                     android:layout_marginTop="8dp"
                     android:lineSpacingMultiplier="1.3"
                     android:text="@string/guide_text25"
-                    android:textColor="#666666"
+                    android:textColor="@color/text_color66"
                     android:textSize="14sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:background="#F5F5F5"
+                    android:background="@color/chatBackground"
                     android:orientation="vertical"
                     android:padding="12dp">
 
@@ -447,7 +447,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/guide_text26"
-                        android:textColor="#333333"
+                        android:textColor="@color/text_color99"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -462,7 +462,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@string/guide_text27"
-                            android:textColor="#666666"
+                            android:textColor="@color/text_color66"
                             android:textSize="14sp" />
 
                         <TextView
@@ -511,7 +511,7 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:background="@drawable/rounded_bg"
-                        android:backgroundTint="#4CAF50"
+                        android:backgroundTint="@color/dash_views"
                         android:gravity="center"
                         android:text="@string/guide_text30"
                         android:textColor="@color/white"
@@ -524,7 +524,7 @@
                         android:layout_marginStart="12dp"
                         android:layout_weight="1"
                         android:text="@string/guide_text31"
-                        android:textColor="#333333"
+                        android:textColor="@color/text_color99"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -535,7 +535,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/guide_text32"
-                    android:textColor="#333333"
+                    android:textColor="@color/text_color99"
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
@@ -544,7 +544,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:text="@string/guide_text33"
-                    android:textColor="#666666"
+                    android:textColor="@color/text_color66"
                     android:textSize="14sp"
                     android:lineSpacingMultiplier="1.3" />
 
@@ -568,7 +568,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_weight="1"
                         android:text="@string/guide_text35"
-                        android:textColor="#2E7D32"
+                        android:textColor="@color/text_color26"
                         android:textSize="14sp"
                         android:textStyle="bold" />
 
@@ -586,7 +586,7 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+        android:background="@color/white"
         android:elevation="8dp"
         android:gravity="center"
         android:orientation="horizontal"
@@ -706,7 +706,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/guide_small"
-                android:tint="#04AC58" />
+                android:tint="@color/title_bar" />
 
             <TextView
                 android:id="@+id/text_guide"
@@ -714,7 +714,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:text="@string/guide_nav_text"
-                android:textColor="#04AC58"
+                android:textColor="@color/title_bar"
                 android:textSize="12sp"
                 android:textStyle="bold" />
 

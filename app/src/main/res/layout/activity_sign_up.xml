@@ -39,7 +39,7 @@
             android:gravity="center"
             android:letterSpacing="0.01"
             android:text="@string/username"
-            android:textColor="#2A2A2A"
+            android:textColor="@color/text_color33"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -86,7 +86,7 @@
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.01"
             android:text="@string/email"
-            android:textColor="#2A2A2A"
+            android:textColor="@color/text_color33"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -133,7 +133,7 @@
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="0.01"
             android:text="@string/pass"
-            android:textColor="#2A2A2A"
+            android:textColor="@color/text_color33"
             android:textSize="20sp"
             android:textStyle="bold" />
 
@@ -157,7 +157,7 @@
             app:hintAnimationEnabled="true"
             app:hintTextColor="#888888"
             app:passwordToggleEnabled="true"
-            app:passwordToggleTint="#666666">
+            app:passwordToggleTint="@color/text_color66">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editText_password"
@@ -184,7 +184,7 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginHorizontal="20dp"
-        android:backgroundTint="#04AC58"
+        android:backgroundTint="@color/title_bar"
         android:elevation="8dp"
         android:fontFamily="sans-serif-medium"
         android:letterSpacing="0.02"
@@ -193,7 +193,7 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:backgroundTint="#04AC58"
+        app:backgroundTint="@color/title_bar"
         app:cornerRadius="28dp"
         app:rippleColor="@color/white"
         app:strokeWidth="0dp" />
@@ -258,9 +258,9 @@
             android:textColor="#1F1F1F"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:backgroundTint="#FFFFFF"
+            app:backgroundTint="@color/white"
             app:cornerRadius="38dp"
-            app:rippleColor="#F5F5F5"
+            app:rippleColor="@color/chatBackground"
             app:strokeColor="#E0E0E0"
             app:strokeWidth="1dp" />
 
@@ -283,7 +283,7 @@
             android:textStyle="bold"
             app:backgroundTint="@color/black"
             app:cornerRadius="38dp"
-            app:rippleColor="#333333" />
+            app:rippleColor="@color/text_color99" />
 
     </LinearLayout>
 

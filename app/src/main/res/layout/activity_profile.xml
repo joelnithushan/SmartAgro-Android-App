@@ -27,7 +27,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#04AC58"
+                android:background="@color/title_bar"
                 android:orientation="vertical"
                 android:padding="20dp">
 
@@ -35,7 +35,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/profile_nav_text"
-                    android:textColor="#ffffff"
+                    android:textColor="@color/white"
                     android:textSize="28sp"
                     android:textStyle="bold" />
 
@@ -135,19 +135,19 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="20dp"
-                android:backgroundTint="#04AC58"
+                android:backgroundTint="@color/title_bar"
                 android:elevation="8dp"
                 android:fontFamily="sans-serif-medium"
                 android:letterSpacing="0.02"
                 android:stateListAnimator="@null"
                 android:text="@string/logout_lable"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:background="@color/button"
                 app:backgroundTint="@color/button"
                 app:cornerRadius="28dp"
-                app:rippleColor="#FFFFFF"
+                app:rippleColor="@color/white"
                 app:strokeWidth="0dp" />
 
         </LinearLayout>
@@ -158,7 +158,7 @@
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
+        android:background="@color/white"
         android:elevation="8dp"
         android:gravity="center"
         android:orientation="horizontal"
