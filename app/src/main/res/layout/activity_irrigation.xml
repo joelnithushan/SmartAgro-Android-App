@@ -83,8 +83,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
-                        android:thumbTint="#04AC58"
-                        android:trackTint="#E0E0E0" />
+                        android:thumbTint="#04AC58" />
 
                 </LinearLayout>
 
@@ -269,7 +268,7 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:src="@drawable/guide_small"
-                        android:tint="#FF9800" />
+                        android:tint="#04AC58" />
 
                     <TextView
                         android:layout_width="0dp"
@@ -286,8 +285,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="false"
-                        android:thumbTint="#FF9800"
-                        android:trackTint="#E0E0E0" />
+                        android:thumbTint="#04AC58"/>
 
                 </LinearLayout>
 
@@ -341,16 +339,18 @@
                             android:textColor="#666666"
                             android:textSize="12sp" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_pump1"
-                            android:layout_width="wrap_content"
+                            android:layout_width="80dp"
                             android:layout_height="36dp"
                             android:layout_marginTop="8dp"
-                            android:background="@drawable/rounded_bg"
-                            android:backgroundTint="#04AC58"
-                            android:text="@string/irri_text17"
+                            android:background="@drawable/button_background"
+                            android:text="@string/irri_text20"
                             android:textColor="@color/white"
-                            android:textSize="12sp" />
+                            android:textStyle="bold"
+                            android:textSize="12sp"
+                            android:minWidth="48dp"
+                            android:minHeight="48dp" />
 
                     </LinearLayout>
 
@@ -381,16 +381,18 @@
                             android:textColor="#666666"
                             android:textSize="12sp" />
 
-                        <Button
+                        <androidx.appcompat.widget.AppCompatButton
                             android:id="@+id/btn_pump2"
-                            android:layout_width="wrap_content"
+                            android:layout_width="80dp"
                             android:layout_height="36dp"
                             android:layout_marginTop="8dp"
-                            android:background="@drawable/rounded_bg"
-                            android:backgroundTint="#04AC58"
+                            android:background="@drawable/button_background"
                             android:text="@string/irri_text20"
                             android:textColor="@color/white"
-                            android:textSize="12sp" />
+                            android:textStyle="bold"
+                            android:textSize="12sp"
+                            android:minWidth="48dp"
+                            android:minHeight="48dp" />
 
                     </LinearLayout>
 
@@ -418,7 +420,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="8dp"
                         android:text="@string/irri_text22"
-                        android:textColor="#FF9800"
+                        android:textColor="@color/button"
                         android:textSize="16sp"
                         android:textStyle="bold" />
 

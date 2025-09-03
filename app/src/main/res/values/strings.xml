@@ -52,7 +52,7 @@
     <string name="chatbot_title">Agri AI Chat</string>
     <string name="chatbot_chat1">Hello Joel, Welcome to SmartAgro AI!</string>
     <string name="chatbot_chat2">How can I help you today?</string>
-    <string name="chatbot_chat3">What\'s the best time to water my tomatoes?</string>
+    <string name="chatbot_chat3">What\'s the best time to water\nmy tomatoes?</string>
     <string name="chatbot_chat4">The best time to water tomatoes is early morning (6-8 AM) or late evening (6-8 PM). This helps prevent water evaporation and allows plants to absorb water efficiently.</string>
     <string name="chatbot_label">Type your message...</string>
     <string name="dash_lable">Dashboard</string>

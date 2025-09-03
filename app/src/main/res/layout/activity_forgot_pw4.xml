@@ -9,33 +9,6 @@
     android:backgroundTint="@color/background"
     tools:context=".ForgotPW4Activity">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnLetsGo"
-        style="@style/Widget.MaterialComponents.Button"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="250dp"
-        android:layout_marginBottom="10dp"
-        android:backgroundTint="#04AC58"
-        android:elevation="8dp"
-        android:fontFamily="sans-serif-medium"
-        android:letterSpacing="0.02"
-        android:stateListAnimator="@null"
-        android:text="@string/btn_letsgo"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:backgroundTint="#04AC58"
-        app:cornerRadius="28dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.618"
-        app:rippleColor="@color/white"
-        app:strokeWidth="0dp" />
-
     <TextView
         android:id="@+id/textView_welcome4"
         android:layout_width="wrap_content"
@@ -70,6 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
+        android:foregroundGravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -77,4 +51,31 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.455"
         app:srcCompat="@drawable/tick" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnLetsGo"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="250dp"
+        android:layout_marginBottom="10dp"
+        android:backgroundTint="#04AC58"
+        android:elevation="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:letterSpacing="0.02"
+        android:stateListAnimator="@null"
+        android:text="@string/btn_letsgo"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:backgroundTint="#04AC58"
+        app:cornerRadius="28dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.618"
+        app:rippleColor="@color/white"
+        app:strokeWidth="0dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

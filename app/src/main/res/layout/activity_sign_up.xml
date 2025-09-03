@@ -144,7 +144,7 @@
             android:layout_gravity="center"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="10dp"
-            android:elevation="12dp"
+            android:elevation="8dp"
             android:outlineProvider="bounds"
             app:boxBackgroundColor="@color/white"
             app:boxBackgroundMode="outline"
