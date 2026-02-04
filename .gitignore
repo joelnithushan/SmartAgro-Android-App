@@ -14,6 +14,5 @@
 .cxx
 local.properties
 
-# Documentation files (keep local, don't push)
 PROJECT_ANALYSIS.md
 REFACTORING_SUMMARY.md
