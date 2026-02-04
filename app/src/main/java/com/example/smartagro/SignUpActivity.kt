@@ -2,6 +2,7 @@ package com.example.smartagro
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.widget.Button
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -27,13 +28,16 @@ class SignUpActivity : AppCompatActivity() {
         initViews()
 
         signUpButton.setOnClickListener {
-            Toast.makeText(this, "Sign Up Successful!", Toast.LENGTH_SHORT).show()
-
+            Toast.makeText(
+                this,
+                "Sign Up Successful!",
+                Toast.LENGTH_SHORT
+            ).show()
             val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
-
-            finish()
+            startActivity (intent)
+            finish ()
         }
+
     }
 
     private fun initViews() {

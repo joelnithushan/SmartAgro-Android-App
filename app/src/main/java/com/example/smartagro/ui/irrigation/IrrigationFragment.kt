@@ -49,7 +49,6 @@ class IrrigationFragment : Fragment() {
         }
         
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            // Disable controls while loading if needed
             binding.switchAutoMode.isEnabled = !isLoading
             binding.switchManualMode.isEnabled = !isLoading
             binding.btnPump1.isEnabled = !isLoading
@@ -79,14 +78,11 @@ class IrrigationFragment : Fragment() {
         binding.thresholdValue.text = "${status.threshold.toInt()}%"
         binding.durationValue.text = "${status.duration} minutes"
         
-        // Update pump buttons
         binding.btnPump1.text = if (status.pump1Status) "Turn OFF" else "Turn ON"
         binding.btnPump2.text = if (status.pump2Status) "Turn OFF" else "Turn ON"
         
-        // Update last watered
         if (status.lastWatered > 0) {
             val lastWateredText = status.lastWatered.toTimeAgo()
-            // Update last watered TextView if exists
         }
     }
     
@@ -120,7 +116,6 @@ class IrrigationFragment : Fragment() {
         }
         
         binding.navIrrigation.setOnClickListener {
-            // Already on irrigation
         }
         
         binding.navChatbot.setOnClickListener {

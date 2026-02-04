@@ -48,32 +48,20 @@ class DashboardFragment : Fragment() {
         }
         
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-            // Show/hide loading indicator if needed
         }
         
         viewModel.error.observe(viewLifecycleOwner) { error ->
             error?.let {
-                // Show error message
                 android.widget.Toast.makeText(requireContext(), it, android.widget.Toast.LENGTH_SHORT).show()
             }
         }
     }
     
     private fun updateUI(data: com.example.smartagro.domain.model.SensorData) {
-        // Update all sensor values dynamically
-        // Note: You'll need to add IDs to TextViews in fragment_dashboard.xml
-        // For now, this is a template - update based on your actual layout IDs
-        
-        // Example updates (adjust IDs based on your layout):
-        // binding.airTempValue.text = "${data.airTemperature}°C"
-        // binding.soilMoistureValue.text = "${data.soilMoisture}% (VWC)"
-        // binding.lightProgress.progress = data.lightLevel.toInt()
-        // binding.waterProgress.progress = data.waterLevel.toInt()
     }
     
     private fun setupBottomNavigation() {
         binding.navDashboard.setOnClickListener {
-            // Already on dashboard
         }
         
         binding.navIrrigation.setOnClickListener {

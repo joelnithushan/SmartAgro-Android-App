@@ -10,7 +10,7 @@ data class IrrigationStatus(
     val threshold: Double = 30.0,
     val pump1Status: Boolean = false,
     val pump2Status: Boolean = false,
-    val duration: Int = 30, // minutes
+    val duration: Int = 30,
     val morningSchedule: String = "06:00 AM",
     val eveningSchedule: String = "06:00 PM",
     val systemActive: Boolean = true,
