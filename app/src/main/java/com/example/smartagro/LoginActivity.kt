@@ -35,20 +35,23 @@ class LoginActivity : AppCompatActivity() {
 
         val buttonNavigate1: Button = findViewById(R.id.btnLogin)
         buttonNavigate1.setOnClickListener {
-            val intent = Intent(this, DashboardActivity::class.java)
+            val intent = Intent(this, com.example.smartagro.ui.MainHostActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         val buttonNavigate2: Button = findViewById(R.id.btnGoogle)
         buttonNavigate2.setOnClickListener {
-            val intent = Intent(this, DashboardActivity::class.java)
+            val intent = Intent(this, com.example.smartagro.ui.MainHostActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         val buttonNavigate3: Button = findViewById(R.id.btnApple)
         buttonNavigate3.setOnClickListener {
-            val intent = Intent(this, DashboardActivity::class.java)
+            val intent = Intent(this, com.example.smartagro.ui.MainHostActivity::class.java)
             startActivity(intent)
+            finish()
         }
     }
 }
