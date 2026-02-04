@@ -13,11 +13,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.smartagro.R
 import com.example.smartagro.databinding.FragmentIrrigationBinding
-import com.example.smartagro.domain.model.IrrigationState
-import com.example.smartagro.utils.Constants
-import com.example.smartagro.utils.ViewModelFactory
-import com.example.smartagro.utils.toTimeAgo
-import com.example.smartagro.viewmodel.IrrigationViewModel
+import com.example.smartagro.utils.DeviceViewModelFactory
+import com.example.smartagro.utils.formatTimestamp
+import com.example.smartagro.viewmodel.DeviceSelectionViewModel
+import com.example.smartagro.viewmodel.IrrigationRtdbViewModel
+import com.example.smartagro.viewmodel.IrrigationUiState
 import kotlinx.coroutines.launch
 
 class IrrigationFragment : Fragment() {
@@ -25,17 +25,9 @@ class IrrigationFragment : Fragment() {
     private var _binding: FragmentIrrigationBinding? = null
     private val binding get() = _binding!!
     
-    private val viewModel: IrrigationViewModel by viewModels { 
-        ViewModelFactory(Constants.DEFAULT_FARM_ID) 
-    }
-    
-    private var thresholdUpdateHandler: android.os.Handler? = null
-    private val thresholdUpdateRunnable = object : Runnable {
-        override fun run() {
-            val currentValue = binding.sliderThreshold.value.toDouble()
-            viewModel.setThreshold(currentValue)
-        }
-    }
+    private val deviceFactory = DeviceViewModelFactory()
+    private val deviceSelectionViewModel: DeviceSelectionViewModel by viewModels { deviceFactory }
+    private val viewModel: IrrigationRtdbViewModel by viewModels { deviceFactory }
     
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,23 +44,25 @@ class IrrigationFragment : Fragment() {
         setupObservers()
         setupClickListeners()
         setupBottomNavigation()
+
+        deviceSelectionViewModel.start()
+        viewModel.observe(deviceSelectionViewModel.selectedDeviceId)
     }
     
     private fun setupObservers() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.irrigationState.collect { state ->
-                state?.let { updateUI(it) }
+            viewModel.uiState.collect { state ->
+                updateUiFromRtdb(state)
             }
         }
-        
+
         viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
             animateViewVisibility(binding.loadingState, if (isLoading) View.VISIBLE else View.GONE)
-            
-            binding.switchManualToggle.isEnabled = !isLoading
-            binding.toggleMode.isEnabled = !isLoading
-            
-            val isAutoMode = viewModel.irrigationState.value?.mode == "AUTO"
-            binding.sliderThreshold.isEnabled = !isLoading && isAutoMode
+            binding.switchManualToggle.isEnabled = !isLoading && (viewModel.writing.value != true)
+        }
+
+        viewModel.writing.observe(viewLifecycleOwner) { isWriting ->
+            binding.switchManualToggle.isEnabled = !isWriting && (viewModel.loading.value != true)
         }
         
         viewModel.errorMessage.observe(viewLifecycleOwner) { error ->
@@ -79,84 +73,49 @@ class IrrigationFragment : Fragment() {
                 animateViewVisibility(binding.errorState, View.GONE)
             }
         }
-        
-        viewModel.isAutoModeActive.observe(viewLifecycleOwner) { isActive ->
-            animateViewVisibility(binding.autoModeBanner, if (isActive) View.VISIBLE else View.GONE)
-        }
     }
     
-    private fun updateUI(state: IrrigationState) {
-        binding.tvIrrigationStatus.text = if (state.isOn) "ON" else "OFF"
+    private fun updateUiFromRtdb(state: IrrigationUiState) {
+        val isOn = state.isOn
+        binding.tvIrrigationStatus.text = when (isOn) {
+            true -> "ON"
+            false -> "OFF"
+            null -> "--"
+        }
         binding.tvIrrigationStatus.setTextColor(
             ContextCompat.getColor(
                 requireContext(),
-                if (state.isOn) R.color.status_normal else R.color.status_high
+                if (isOn == true) R.color.status_normal else R.color.status_high
             )
         )
         
         binding.switchManualToggle.setOnCheckedChangeListener(null)
-        binding.switchManualToggle.isChecked = state.isOn
+        binding.switchManualToggle.isChecked = isOn == true
         setupToggleListener()
-        
-        when (state.mode) {
-            "MANUAL" -> {
-                binding.toggleMode.check(R.id.btn_mode_manual)
-                binding.autoModeSettings.visibility = View.GONE
-            }
-            "AUTO" -> {
-                binding.toggleMode.check(R.id.btn_mode_auto)
-                binding.autoModeSettings.visibility = View.VISIBLE
-                binding.sliderThreshold.value = state.moistureThreshold.toFloat()
-                binding.tvThresholdValue.text = "${state.moistureThreshold.toInt()}%"
-            }
-        }
-        
-        if (state.lastChangedAt > 0) {
-            binding.tvLastActionTime.text = state.lastChangedAt.toTimeAgo()
-            binding.tvLastActionSource.text = "Source: ${state.lastChangedBy}"
+
+        val relay = state.relayControl
+        val ts = relay?.timestamp ?: state.relayStatusUi?.timestamp
+        if (ts != null && ts > 0) {
+            binding.tvLastActionTime.text = formatTimestamp(ts)
         } else {
-            binding.tvLastActionTime.text = "Never"
-            binding.tvLastActionSource.text = "Source: -"
+            binding.tvLastActionTime.text = formatTimestamp(null)
         }
+        val by = relay?.lastChangedBy ?: state.relayStatusUi?.requestedBy ?: "—"
+        binding.tvLastActionSource.text = "Source: $by"
     }
     
     private fun setupToggleListener() {
         binding.switchManualToggle.setOnCheckedChangeListener { _, isChecked ->
-            val currentState = viewModel.irrigationState.value
-            if (isChecked != currentState?.isOn) {
+            val currentIsOn = viewModel.uiState.value.isOn
+            if (currentIsOn == null || isChecked != currentIsOn) {
                 showToggleConfirmation(isChecked)
             }
         }
     }
     
     private fun setupClickListeners() {
-        binding.toggleMode.addOnButtonCheckedListener { _, checkedId, isChecked ->
-            if (isChecked) {
-                when (checkedId) {
-                    R.id.btn_mode_manual -> {
-                        viewModel.setMode("MANUAL")
-                    }
-                    R.id.btn_mode_auto -> {
-                        viewModel.setMode("AUTO")
-                    }
-                }
-            }
-        }
-        
-        binding.sliderThreshold.addOnChangeListener { _, value, fromUser ->
-            binding.tvThresholdValue.text = "${value.toInt()}%"
-            
-            if (fromUser) {
-                thresholdUpdateHandler?.removeCallbacks(thresholdUpdateRunnable)
-                thresholdUpdateHandler = android.os.Handler(android.os.Looper.getMainLooper())
-                thresholdUpdateHandler?.postDelayed(thresholdUpdateRunnable, 500)
-            }
-        }
-        
         binding.btnRetry.setOnClickListener {
             binding.errorState.visibility = View.GONE
-            viewModel.clearError()
-            viewModel.refreshStatus()
         }
     }
     
@@ -164,12 +123,12 @@ class IrrigationFragment : Fragment() {
         AlertDialog.Builder(requireContext())
             .setTitle("Turn irrigation ${if (turnOn) "ON" else "OFF"}?")
             .setPositiveButton("Confirm") { _, _ ->
-                viewModel.toggleIrrigation(true)
+                viewModel.writeRelay(turnOn, mirrorStatus = true)
             }
             .setNegativeButton("Cancel") { _, _ ->
-                val currentState = viewModel.irrigationState.value
+                val currentIsOn = viewModel.uiState.value.isOn
                 binding.switchManualToggle.setOnCheckedChangeListener(null)
-                binding.switchManualToggle.isChecked = currentState?.isOn ?: false
+                binding.switchManualToggle.isChecked = currentIsOn == true
                 setupToggleListener()
             }
             .setCancelable(false)
@@ -227,8 +186,6 @@ class IrrigationFragment : Fragment() {
     
     override fun onDestroyView() {
         super.onDestroyView()
-        thresholdUpdateHandler?.removeCallbacks(thresholdUpdateRunnable)
-        thresholdUpdateHandler = null
         _binding = null
     }
 }

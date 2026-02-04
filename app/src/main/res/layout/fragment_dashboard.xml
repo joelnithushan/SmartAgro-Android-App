@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:background="@color/title_bar"
         android:orientation="vertical"
-        android:padding="20dp"
+        android:padding="@dimen/space_lg"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -49,11 +49,44 @@
             android:id="@+id/tv_farm_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="@dimen/space_xs"
             android:text="Farm-001"
             android:textColor="@color/white"
             android:textSize="14sp"
             android:alpha="0.9" />
+
+        <TextView
+            android:id="@+id/tv_last_seen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:text="Last seen: Unknown"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:alpha="0.85" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/device_picker_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            app:boxBackgroundMode="filled"
+            app:boxBackgroundColor="@android:color/transparent"
+            app:boxStrokeColor="@color/white"
+            app:hintTextColor="@color/white"
+            app:endIconMode="dropdown_menu"
+            android:alpha="0.95">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/act_device_picker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Select device"
+                android:inputType="none"
+                android:textColor="@color/white"
+                android:textSize="14sp" />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 
@@ -75,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:padding="@dimen/space_md">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_sensor_cards"

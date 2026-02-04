@@ -5,7 +5,6 @@ import com.example.smartagro.domain.model.IrrigationState
 import com.example.smartagro.domain.model.SensorSnapshot
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +12,7 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 
 class FirebaseDataSource {
-    private val database = FirebaseDatabase.getInstance()
+    private val database = FirebaseProvider.rtdb
     private val TAG = "FirebaseDataSource"
     
     fun observeSensors(farmId: String): Flow<SensorSnapshot> = callbackFlow {

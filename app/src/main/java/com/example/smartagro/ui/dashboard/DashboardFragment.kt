@@ -10,12 +10,17 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.smartagro.R
 import com.example.smartagro.databinding.FragmentDashboardBinding
-import com.example.smartagro.utils.ViewModelFactory
+import com.example.smartagro.domain.model.firestore.UserDevice
+import com.example.smartagro.utils.DeviceViewModelFactory
 import com.example.smartagro.utils.Constants
-import com.example.smartagro.viewmodel.DashboardViewModel
+import com.example.smartagro.utils.GridSpacingItemDecoration
+import com.example.smartagro.utils.formatTimestamp
+import com.example.smartagro.viewmodel.DeviceSelectionViewModel
+import com.example.smartagro.viewmodel.MonitoringViewModel
 import kotlinx.coroutines.launch
 
 class DashboardFragment : Fragment() {
@@ -23,9 +28,9 @@ class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
     
-    private val viewModel: DashboardViewModel by viewModels { 
-        ViewModelFactory(Constants.DEFAULT_FARM_ID) 
-    }
+    private val deviceFactory = DeviceViewModelFactory()
+    private val deviceSelectionViewModel: DeviceSelectionViewModel by viewModels { deviceFactory }
+    private val monitoringViewModel: MonitoringViewModel by viewModels { deviceFactory }
     private lateinit var adapter: SensorCardAdapter
     
     override fun onCreateView(
@@ -45,12 +50,19 @@ class DashboardFragment : Fragment() {
         setupObservers()
         setupClickListeners()
         setupBottomNavigation()
+
+        deviceSelectionViewModel.start()
+        monitoringViewModel.observe(deviceSelectionViewModel.selectedDeviceId)
     }
     
     private fun setupRecyclerView() {
         adapter = SensorCardAdapter(emptyList())
-        binding.rvSensorCards.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvSensorCards.layoutManager = GridLayoutManager(requireContext(), 2)
         binding.rvSensorCards.adapter = adapter
+        val spacing = resources.getDimensionPixelSize(R.dimen.space_md)
+        if (binding.rvSensorCards.itemDecorationCount == 0) {
+            binding.rvSensorCards.addItemDecoration(GridSpacingItemDecoration(2, spacing))
+        }
     }
     
     private fun setupSwipeRefresh() {
@@ -58,13 +70,16 @@ class DashboardFragment : Fragment() {
             ContextCompat.getColor(requireContext(), R.color.button)
         )
         binding.swipeRefresh.setOnRefreshListener {
-            viewModel.refreshData()
+            val selected = deviceSelectionViewModel.selectedDeviceId.value
+            if (selected != null) {
+                monitoringViewModel.observe(deviceSelectionViewModel.selectedDeviceId)
+            }
         }
     }
     
     private fun setupObservers() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.sensorCards.collect { cards ->
+            monitoringViewModel.sensorCards.collect { cards ->
                 if (cards.isNotEmpty()) {
                     adapter = SensorCardAdapter(cards)
                     binding.rvSensorCards.adapter = adapter
@@ -73,26 +88,32 @@ class DashboardFragment : Fragment() {
                     animateViewVisibility(binding.errorState, View.GONE)
                 } else {
                     animateViewVisibility(binding.rvSensorCards, View.GONE)
-                    if (viewModel.errorMessage.value == null) {
+                    if (monitoringViewModel.errorMessage.value == null) {
                         animateViewVisibility(binding.emptyState, View.VISIBLE)
                     }
                 }
             }
         }
-        
+
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.sensorSnapshot.collect { snapshot ->
-                snapshot?.let {
-                    binding.tvFarmName.text = Constants.DEFAULT_FARM_ID
-                }
+            deviceSelectionViewModel.selectedDeviceId.collect { deviceId ->
+                binding.tvFarmName.text = deviceId ?: "-"
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            deviceSelectionViewModel.devices.collect { devices ->
+                setupDevicePicker(devices)
+            }
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            monitoringViewModel.lastSeen.collect { ts ->
+                binding.tvLastSeen.text = "Last seen: ${formatTimestamp(ts)}"
             }
         }
         
-        viewModel.farmName.observe(viewLifecycleOwner) { name ->
-            binding.tvFarmName.text = name
-        }
-        
-        viewModel.loading.observe(viewLifecycleOwner) { isLoading ->
+        monitoringViewModel.loading.observe(viewLifecycleOwner) { isLoading ->
             binding.swipeRefresh.isRefreshing = isLoading
             
             if (isLoading && adapter.itemCount == 0) {
@@ -105,7 +126,7 @@ class DashboardFragment : Fragment() {
             }
         }
         
-        viewModel.errorMessage.observe(viewLifecycleOwner) { error ->
+        monitoringViewModel.errorMessage.observe(viewLifecycleOwner) { error ->
             if (error != null) {
                 animateViewVisibility(binding.errorState, View.VISIBLE)
                 animateViewVisibility(binding.rvSensorCards, View.GONE)
@@ -117,6 +138,31 @@ class DashboardFragment : Fragment() {
             }
         }
     }
+
+    private fun setupDevicePicker(devices: List<UserDevice>) {
+        val items = devices.map { deviceLabel(it) }
+        val adapter = android.widget.ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, items)
+        binding.actDevicePicker.setAdapter(adapter)
+
+        val selectedId = deviceSelectionViewModel.selectedDeviceId.value
+        val selectedIndex = devices.indexOfFirst { it.deviceId == selectedId }
+        if (selectedIndex >= 0) {
+            binding.actDevicePicker.setText(items[selectedIndex], false)
+        } else if (items.isNotEmpty() && binding.actDevicePicker.text.isNullOrBlank()) {
+            binding.actDevicePicker.setText(items.first(), false)
+        }
+
+        binding.actDevicePicker.setOnItemClickListener { _, _, position, _ ->
+            val selected = devices.getOrNull(position)?.deviceId ?: return@setOnItemClickListener
+            deviceSelectionViewModel.selectDevice(selected)
+        }
+    }
+
+    private fun deviceLabel(device: UserDevice): String {
+        val name = device.farmName?.takeIf { it.isNotBlank() } ?: device.deviceId
+        val loc = device.location?.takeIf { it.isNotBlank() }
+        return if (loc != null) "$name • $loc" else name
+    }
     
     private fun setupClickListeners() {
         binding.btnGoToIrrigation.setOnClickListener {
@@ -125,8 +171,11 @@ class DashboardFragment : Fragment() {
         
         binding.btnRetry.setOnClickListener {
             binding.errorState.visibility = View.GONE
-            viewModel.clearError()
-            viewModel.refreshData()
+            monitoringViewModel.errorMessage.value?.let { }
+            val selected = deviceSelectionViewModel.selectedDeviceId.value
+            if (selected != null) {
+                monitoringViewModel.observe(deviceSelectionViewModel.selectedDeviceId)
+            }
         }
         
         binding.ivSettings.setOnClickListener {
@@ -139,7 +188,6 @@ class DashboardFragment : Fragment() {
         val dialog = com.example.smartagro.ui.dialog.SettingsDialog(currentFarmId) { newFarmId ->
             if (newFarmId != currentFarmId) {
                 Constants.setFarmId(newFarmId)
-                viewModel.updateFarmId(newFarmId)
             }
         }
         dialog.show(parentFragmentManager, "SettingsDialog")
