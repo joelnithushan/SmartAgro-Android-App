@@ -1,43 +1,38 @@
 package com.example.smartagro.data.repository
 
 import com.example.smartagro.data.firebase.FirebaseDataSource
-import com.example.smartagro.domain.model.IrrigationStatus
-import com.example.smartagro.domain.model.SensorData
+import com.example.smartagro.domain.model.IrrigationState
+import com.example.smartagro.domain.model.SensorSnapshot
 import kotlinx.coroutines.flow.Flow
 
 class AgroRepository(
     private val firebaseDataSource: FirebaseDataSource
 ) {
-    fun observeSensorData(): Flow<SensorData> = firebaseDataSource.observeSensorData()
-    
-    suspend fun getSensorData(): SensorData = firebaseDataSource.getSensorData()
-    
-    fun observeIrrigationStatus(): Flow<IrrigationStatus> = 
-        firebaseDataSource.observeIrrigationStatus()
-    
-    suspend fun getIrrigationStatus(): IrrigationStatus = 
-        firebaseDataSource.getIrrigationStatus()
-    
-    suspend fun togglePump(pumpId: Int, status: Boolean) {
-        firebaseDataSource.togglePump(pumpId, status)
-        if (status) {
-            firebaseDataSource.updateLastWatered()
-        }
+    fun observeSensors(farmId: String): Flow<SensorSnapshot> {
+        return firebaseDataSource.observeSensors(farmId)
     }
     
-    suspend fun setAutoMode(enabled: Boolean) {
-        firebaseDataSource.setAutoMode(enabled)
+    suspend fun getSensors(farmId: String): SensorSnapshot {
+        return firebaseDataSource.getSensors(farmId)
     }
     
-    suspend fun setManualMode(enabled: Boolean) {
-        firebaseDataSource.setManualMode(enabled)
+    fun observeIrrigation(farmId: String): Flow<IrrigationState> {
+        return firebaseDataSource.observeIrrigation(farmId)
     }
     
-    suspend fun setThreshold(threshold: Double) {
-        firebaseDataSource.setThreshold(threshold)
+    suspend fun getIrrigation(farmId: String): IrrigationState {
+        return firebaseDataSource.getIrrigation(farmId)
     }
     
-    suspend fun setDuration(duration: Int) {
-        firebaseDataSource.setDuration(duration)
+    suspend fun setIrrigationOn(farmId: String, on: Boolean, changedBy: String) {
+        firebaseDataSource.setIrrigationOn(farmId, on, changedBy)
+    }
+    
+    suspend fun setMode(farmId: String, mode: String) {
+        firebaseDataSource.setMode(farmId, mode)
+    }
+    
+    suspend fun setThreshold(farmId: String, value: Double) {
+        firebaseDataSource.setThreshold(farmId, value)
     }
 }

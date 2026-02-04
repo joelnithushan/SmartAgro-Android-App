@@ -1,11 +1,14 @@
 package com.example.smartagro.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.smartagro.data.irrigation.AutoIrrigationManager
 import com.example.smartagro.data.repository.AgroRepository
-import com.example.smartagro.domain.model.IrrigationStatus
+import com.example.smartagro.domain.model.IrrigationState
+import com.example.smartagro.utils.Constants
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -13,140 +16,149 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class IrrigationViewModel(
-    private val repository: AgroRepository
+    private val repository: AgroRepository,
+    private val farmId: String = Constants.DEFAULT_FARM_ID
 ) : ViewModel() {
     
-    private val _irrigationStatus = MutableStateFlow<IrrigationStatus?>(null)
-    val irrigationStatus: StateFlow<IrrigationStatus?> = _irrigationStatus.asStateFlow()
+    private val TAG = "IrrigationViewModel"
     
-    private val _isLoading = MutableLiveData<Boolean>(false)
-    val isLoading: LiveData<Boolean> = _isLoading
+    private val _irrigationState = MutableStateFlow<IrrigationState?>(null)
+    val irrigationState: StateFlow<IrrigationState?> = _irrigationState.asStateFlow()
     
-    private val _error = MutableLiveData<String?>()
-    val error: LiveData<String?> = _error
+    private val _loading = MutableLiveData<Boolean>(false)
+    val loading: LiveData<Boolean> = _loading
     
-    private val _actionSuccess = MutableLiveData<String?>()
-    val actionSuccess: LiveData<String?> = _actionSuccess
+    private val _errorMessage = MutableLiveData<String?>()
+    val errorMessage: LiveData<String?> = _errorMessage
+    
+    private val _isAutoModeActive = MutableLiveData<Boolean>(false)
+    val isAutoModeActive: LiveData<Boolean> = _isAutoModeActive
+    
+    private var autoIrrigationManager: AutoIrrigationManager? = null
     
     init {
-        observeIrrigationStatus()
+        observeIrrigation()
+        setupAutoIrrigation()
     }
     
-    private fun observeIrrigationStatus() {
+    private fun setupAutoIrrigation() {
         viewModelScope.launch {
-            repository.observeIrrigationStatus()
+            irrigationState.collect { state ->
+                if (state?.mode == "AUTO") {
+                    if (autoIrrigationManager == null) {
+                        autoIrrigationManager = AutoIrrigationManager(
+                            repository,
+                            farmId,
+                            viewModelScope
+                        )
+                        autoIrrigationManager?.start(
+                            repository.observeSensors(farmId),
+                            repository.observeIrrigation(farmId)
+                        )
+                        _isAutoModeActive.postValue(true)
+                        Log.d(TAG, "Auto irrigation manager started")
+                    }
+                } else {
+                    autoIrrigationManager?.stop()
+                    autoIrrigationManager = null
+                    _isAutoModeActive.postValue(false)
+                    Log.d(TAG, "Auto irrigation manager stopped")
+                }
+            }
+        }
+    }
+    
+    override fun onCleared() {
+        super.onCleared()
+        autoIrrigationManager?.stop()
+        autoIrrigationManager = null
+    }
+    
+    private fun observeIrrigation() {
+        viewModelScope.launch {
+            _loading.postValue(true)
+            _errorMessage.postValue(null)
+            
+            repository.observeIrrigation(farmId)
                 .catch { e ->
-                    _error.postValue(e.message ?: "Error fetching irrigation status")
+                    Log.e(TAG, "Error observing irrigation", e)
+                    _errorMessage.postValue(e.message ?: "Error fetching irrigation status")
+                    _loading.postValue(false)
                 }
-                .collect { status ->
-                    _irrigationStatus.value = status
-                    _isLoading.postValue(false)
+                .collect { state ->
+                    Log.d(TAG, "Irrigation state received: $state")
+                    _irrigationState.value = state
+                    _loading.postValue(false)
+                    _errorMessage.postValue(null)
                 }
         }
     }
     
-    fun togglePump(pumpId: Int) {
-        val currentStatus = _irrigationStatus.value
-        val newStatus = when (pumpId) {
-            1 -> !(currentStatus?.pump1Status ?: false)
-            2 -> !(currentStatus?.pump2Status ?: false)
-            else -> return
-        }
+    fun toggleIrrigation(confirmed: Boolean) {
+        if (!confirmed) return
         
-        _isLoading.postValue(true)
+        val currentState = _irrigationState.value
+        val newOnState = !(currentState?.isOn ?: false)
+        
+        _loading.postValue(true)
         viewModelScope.launch {
             try {
-                repository.togglePump(pumpId, newStatus)
-                _actionSuccess.postValue("Pump $pumpId ${if (newStatus) "turned ON" else "turned OFF"}")
-                _error.postValue(null)
+                repository.setIrrigationOn(farmId, newOnState, "MANUAL")
+                Log.d(TAG, "Irrigation toggled to: $newOnState")
             } catch (e: Exception) {
-                _error.postValue(e.message ?: "Error controlling pump")
+                Log.e(TAG, "Error toggling irrigation", e)
+                _errorMessage.postValue(e.message ?: "Error controlling irrigation")
             } finally {
-                _isLoading.postValue(false)
+                _loading.postValue(false)
             }
         }
     }
     
-    fun setAutoMode(enabled: Boolean) {
-        _isLoading.postValue(true)
+    fun setMode(mode: String) {
+        _loading.postValue(true)
         viewModelScope.launch {
             try {
-                repository.setAutoMode(enabled)
-                _actionSuccess.postValue("Auto mode ${if (enabled) "enabled" else "disabled"}")
-                _error.postValue(null)
+                repository.setMode(farmId, mode)
+                Log.d(TAG, "Mode set to: $mode")
             } catch (e: Exception) {
-                _error.postValue(e.message ?: "Error setting auto mode")
+                Log.e(TAG, "Error setting mode", e)
+                _errorMessage.postValue(e.message ?: "Error setting mode")
             } finally {
-                _isLoading.postValue(false)
-            }
-        }
-    }
-    
-    fun setManualMode(enabled: Boolean) {
-        _isLoading.postValue(true)
-        viewModelScope.launch {
-            try {
-                repository.setManualMode(enabled)
-                _actionSuccess.postValue("Manual mode ${if (enabled) "enabled" else "disabled"}")
-                _error.postValue(null)
-            } catch (e: Exception) {
-                _error.postValue(e.message ?: "Error setting manual mode")
-            } finally {
-                _isLoading.postValue(false)
+                _loading.postValue(false)
             }
         }
     }
     
     fun setThreshold(threshold: Double) {
-        _isLoading.postValue(true)
         viewModelScope.launch {
             try {
-                repository.setThreshold(threshold)
-                _actionSuccess.postValue("Threshold updated to $threshold%")
-                _error.postValue(null)
+                repository.setThreshold(farmId, threshold)
+                Log.d(TAG, "Threshold set to: $threshold")
             } catch (e: Exception) {
-                _error.postValue(e.message ?: "Error setting threshold")
-            } finally {
-                _isLoading.postValue(false)
-            }
-        }
-    }
-    
-    fun setDuration(duration: Int) {
-        _isLoading.postValue(true)
-        viewModelScope.launch {
-            try {
-                repository.setDuration(duration)
-                _actionSuccess.postValue("Duration updated to $duration minutes")
-                _error.postValue(null)
-            } catch (e: Exception) {
-                _error.postValue(e.message ?: "Error setting duration")
-            } finally {
-                _isLoading.postValue(false)
+                Log.e(TAG, "Error setting threshold", e)
+                _errorMessage.postValue(e.message ?: "Error setting threshold")
             }
         }
     }
     
     fun refreshStatus() {
-        _isLoading.postValue(true)
+        _loading.postValue(true)
         viewModelScope.launch {
             try {
-                val status = repository.getIrrigationStatus()
-                _irrigationStatus.value = status
-                _error.postValue(null)
+                val state = repository.getIrrigation(farmId)
+                _irrigationState.value = state
+                _errorMessage.postValue(null)
+                Log.d(TAG, "Status refreshed successfully")
             } catch (e: Exception) {
-                _error.postValue(e.message ?: "Error refreshing status")
+                Log.e(TAG, "Error refreshing status", e)
+                _errorMessage.postValue(e.message ?: "Error refreshing status")
             } finally {
-                _isLoading.postValue(false)
+                _loading.postValue(false)
             }
         }
     }
     
     fun clearError() {
-        _error.value = null
-    }
-    
-    fun clearSuccess() {
-        _actionSuccess.value = null
+        _errorMessage.value = null
     }
 }

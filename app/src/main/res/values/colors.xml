@@ -11,5 +11,11 @@
     <color name="text_color66">#666666</color>
     <color name="text_color33">#2A2A2A</color>
     <color name="text_color26">#2E7D32</color>
+    <color name="status_normal">#4CAF50</color>
+    <color name="status_low">#FF9800</color>
+    <color name="status_high">#F44336</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="divider">#E0E0E0</color>
+    <color name="skeleton">#F5F5F5</color>
 
 </resources>
