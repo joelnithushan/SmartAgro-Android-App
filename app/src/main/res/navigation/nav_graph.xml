@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/dashboard_fragment">
+
+    <fragment
+        android:id="@+id/dashboard_fragment"
+        android:name="com.example.smartagro.ui.dashboard.DashboardFragment"
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_dashboard_to_irrigation"
+            app:destination="@id/irrigation_fragment" />
+        <action
+            android:id="@+id/action_dashboard_to_chatbot"
+            app:destination="@id/chatbot_fragment" />
+        <action
+            android:id="@+id/action_dashboard_to_guide"
+            app:destination="@id/guide_fragment" />
+        <action
+            android:id="@+id/action_dashboard_to_profile"
+            app:destination="@id/profile_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/irrigation_fragment"
+        android:name="com.example.smartagro.ui.irrigation.IrrigationFragment"
+        android:label="Irrigation"
+        tools:layout="@layout/fragment_irrigation">
+        <action
+            android:id="@+id/action_irrigation_to_dashboard"
+            app:destination="@id/dashboard_fragment" />
+        <action
+            android:id="@+id/action_irrigation_to_chatbot"
+            app:destination="@id/chatbot_fragment" />
+        <action
+            android:id="@+id/action_irrigation_to_guide"
+            app:destination="@id/guide_fragment" />
+        <action
+            android:id="@+id/action_irrigation_to_profile"
+            app:destination="@id/profile_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/chatbot_fragment"
+        android:name="com.example.smartagro.ui.chatbot.ChatBotFragment"
+        android:label="Chat Bot"
+        tools:layout="@layout/activity_chat_bot" />
+
+    <fragment
+        android:id="@+id/guide_fragment"
+        android:name="com.example.smartagro.ui.guide.GuideFragment"
+        android:label="Guide"
+        tools:layout="@layout/activity_guide" />
+
+    <fragment
+        android:id="@+id/profile_fragment"
+        android:name="com.example.smartagro.ui.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/activity_profile" />
+
+</navigation>
