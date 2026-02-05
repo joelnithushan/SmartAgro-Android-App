@@ -1,10 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
-}
-
-if (file("google-services.json").exists()) {
-    apply(plugin = "com.google.gms.google-services")
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -12,7 +9,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.smartagro"
+        applicationId = "com.smartagro.solution"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -79,6 +76,9 @@ dependencies {
     
     // SwipeRefreshLayout
     implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.1.0")
+    
+    // MPAndroidChart for charts
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
     
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

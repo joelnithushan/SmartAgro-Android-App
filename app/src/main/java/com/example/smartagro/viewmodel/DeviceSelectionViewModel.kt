@@ -26,8 +26,10 @@ class DeviceSelectionViewModel(
     val selectedDeviceId: StateFlow<String?> = _selectedDeviceId.asStateFlow()
 
     fun start() {
-        val uid = FirebaseProvider.auth.currentUser?.uid
+        val auth = FirebaseProvider.auth
+        val uid = auth?.currentUser?.uid
         if (uid.isNullOrBlank()) {
+            Log.w(TAG, "User not authenticated or Firebase not initialized. Cannot fetch devices.")
             _devices.value = emptyList()
             _selectedDeviceId.value = null
             return
@@ -70,7 +72,8 @@ class DeviceSelectionViewModel(
     }
 
     fun selectDevice(deviceId: String) {
-        val uid = FirebaseProvider.auth.currentUser?.uid
+        val auth = FirebaseProvider.auth
+        val uid = auth?.currentUser?.uid
         _selectedDeviceId.value = deviceId
         if (Constants.ENABLE_WRITE_ACTIVE_DEVICE_ID && !uid.isNullOrBlank()) {
             viewModelScope.launch {

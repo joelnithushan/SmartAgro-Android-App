@@ -11,15 +11,11 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.smartagro.R
 import com.example.smartagro.databinding.FragmentDashboardBinding
-import com.example.smartagro.domain.model.firestore.UserDevice
-import com.example.smartagro.utils.DeviceViewModelFactory
-import com.example.smartagro.utils.Constants
+import com.example.smartagro.utils.DeviceConfig
 import com.example.smartagro.utils.GridSpacingItemDecoration
 import com.example.smartagro.utils.formatTimestamp
-import com.example.smartagro.viewmodel.DeviceSelectionViewModel
 import com.example.smartagro.viewmodel.MonitoringViewModel
 import kotlinx.coroutines.launch
 
@@ -28,10 +24,8 @@ class DashboardFragment : Fragment() {
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
     
-    private val deviceFactory = DeviceViewModelFactory()
-    private val deviceSelectionViewModel: DeviceSelectionViewModel by viewModels { deviceFactory }
-    private val monitoringViewModel: MonitoringViewModel by viewModels { deviceFactory }
-    private lateinit var adapter: SensorCardAdapter
+    private val monitoringViewModel: MonitoringViewModel by viewModels()
+    private lateinit var adapter: SensorCardDarkAdapter
     
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,19 +44,12 @@ class DashboardFragment : Fragment() {
         setupObservers()
         setupClickListeners()
         setupBottomNavigation()
-
-        deviceSelectionViewModel.start()
-        monitoringViewModel.observe(deviceSelectionViewModel.selectedDeviceId)
     }
     
     private fun setupRecyclerView() {
-        adapter = SensorCardAdapter(emptyList())
-        binding.rvSensorCards.layoutManager = GridLayoutManager(requireContext(), 2)
+        adapter = SensorCardDarkAdapter()
+        binding.rvSensorCards.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(requireContext())
         binding.rvSensorCards.adapter = adapter
-        val spacing = resources.getDimensionPixelSize(R.dimen.space_md)
-        if (binding.rvSensorCards.itemDecorationCount == 0) {
-            binding.rvSensorCards.addItemDecoration(GridSpacingItemDecoration(2, spacing))
-        }
     }
     
     private fun setupSwipeRefresh() {
@@ -70,153 +57,107 @@ class DashboardFragment : Fragment() {
             ContextCompat.getColor(requireContext(), R.color.button)
         )
         binding.swipeRefresh.setOnRefreshListener {
-            val selected = deviceSelectionViewModel.selectedDeviceId.value
-            if (selected != null) {
-                monitoringViewModel.observe(deviceSelectionViewModel.selectedDeviceId)
-            }
+            binding.swipeRefresh.isRefreshing = false
         }
     }
     
     private fun setupObservers() {
         viewLifecycleOwner.lifecycleScope.launch {
             monitoringViewModel.sensorCards.collect { cards ->
-                if (cards.isNotEmpty()) {
-                    adapter = SensorCardAdapter(cards)
-                    binding.rvSensorCards.adapter = adapter
-                    animateViewVisibility(binding.rvSensorCards, View.VISIBLE)
-                    animateViewVisibility(binding.emptyState, View.GONE)
-                    animateViewVisibility(binding.errorState, View.GONE)
-                } else {
-                    animateViewVisibility(binding.rvSensorCards, View.GONE)
-                    if (monitoringViewModel.errorMessage.value == null) {
-                        animateViewVisibility(binding.emptyState, View.VISIBLE)
-                    }
-                }
+                // Use submitList instead of recreating adapter - this preserves scroll position
+                adapter.submitList(cards)
+                binding.rvSensorCards.visibility = View.VISIBLE
             }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            deviceSelectionViewModel.selectedDeviceId.collect { deviceId ->
-                binding.tvFarmName.text = deviceId ?: "-"
+            monitoringViewModel.lastReceivedTime.collect { receivedTime ->
+                binding.tvLastUpdated.text = formatLastUpdated(receivedTime)
+            }
+        }
+        
+        viewLifecycleOwner.lifecycleScope.launch {
+            monitoringViewModel.deviceUptime.collect { uptime ->
+                // Uptime is shown separately if needed
             }
         }
 
         viewLifecycleOwner.lifecycleScope.launch {
-            deviceSelectionViewModel.devices.collect { devices ->
-                setupDevicePicker(devices)
-            }
-        }
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            monitoringViewModel.lastSeen.collect { ts ->
-                binding.tvLastSeen.text = "Last seen: ${formatTimestamp(ts)}"
+            monitoringViewModel.online.collect { online ->
+                binding.tvOnlineStatus.text = if (online) "Online" else "Offline"
             }
         }
         
         monitoringViewModel.loading.observe(viewLifecycleOwner) { isLoading ->
             binding.swipeRefresh.isRefreshing = isLoading
-            
-            if (isLoading && adapter.itemCount == 0) {
-                animateViewVisibility(binding.loadingState, View.VISIBLE)
-                animateViewVisibility(binding.rvSensorCards, View.GONE)
-                animateViewVisibility(binding.emptyState, View.GONE)
-                animateViewVisibility(binding.errorState, View.GONE)
-            } else {
-                animateViewVisibility(binding.loadingState, View.GONE)
-            }
         }
         
         monitoringViewModel.errorMessage.observe(viewLifecycleOwner) { error ->
-            if (error != null) {
-                animateViewVisibility(binding.errorState, View.VISIBLE)
-                animateViewVisibility(binding.rvSensorCards, View.GONE)
-                animateViewVisibility(binding.loadingState, View.GONE)
-                animateViewVisibility(binding.emptyState, View.GONE)
-                binding.tvErrorMessage.text = error
-            } else {
-                animateViewVisibility(binding.errorState, View.GONE)
+            if (!error.isNullOrBlank()) {
+                android.widget.Toast.makeText(requireContext(), error, android.widget.Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun setupDevicePicker(devices: List<UserDevice>) {
-        val items = devices.map { deviceLabel(it) }
-        val adapter = android.widget.ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, items)
-        binding.actDevicePicker.setAdapter(adapter)
-
-        val selectedId = deviceSelectionViewModel.selectedDeviceId.value
-        val selectedIndex = devices.indexOfFirst { it.deviceId == selectedId }
-        if (selectedIndex >= 0) {
-            binding.actDevicePicker.setText(items[selectedIndex], false)
-        } else if (items.isNotEmpty() && binding.actDevicePicker.text.isNullOrBlank()) {
-            binding.actDevicePicker.setText(items.first(), false)
-        }
-
-        binding.actDevicePicker.setOnItemClickListener { _, _, position, _ ->
-            val selected = devices.getOrNull(position)?.deviceId ?: return@setOnItemClickListener
-            deviceSelectionViewModel.selectDevice(selected)
-        }
-    }
-
-    private fun deviceLabel(device: UserDevice): String {
-        val name = device.farmName?.takeIf { it.isNotBlank() } ?: device.deviceId
-        val loc = device.location?.takeIf { it.isNotBlank() }
-        return if (loc != null) "$name • $loc" else name
-    }
-    
     private fun setupClickListeners() {
-        binding.btnGoToIrrigation.setOnClickListener {
-            findNavController().navigate(R.id.action_dashboard_to_irrigation)
-        }
-        
-        binding.btnRetry.setOnClickListener {
-            binding.errorState.visibility = View.GONE
-            monitoringViewModel.errorMessage.value?.let { }
-            val selected = deviceSelectionViewModel.selectedDeviceId.value
-            if (selected != null) {
-                monitoringViewModel.observe(deviceSelectionViewModel.selectedDeviceId)
-            }
-        }
-        
         binding.ivSettings.setOnClickListener {
-            showSettingsDialog()
+            showDeviceIdDialog()
         }
     }
-    
-    private fun showSettingsDialog() {
-        val currentFarmId = Constants.DEFAULT_FARM_ID
-        val dialog = com.example.smartagro.ui.dialog.SettingsDialog(currentFarmId) { newFarmId ->
-            if (newFarmId != currentFarmId) {
-                Constants.setFarmId(newFarmId)
+
+    private fun showDeviceIdDialog() {
+        val context = requireContext()
+        val input = android.widget.EditText(context)
+        input.setText(DeviceConfig.currentDeviceId)
+        input.setSelection(input.text.length)
+
+        androidx.appcompat.app.AlertDialog.Builder(context)
+            .setTitle("Set Device ID")
+            .setView(input)
+            .setPositiveButton("Save") { _, _ ->
+                val newId = input.text.toString().trim()
+                DeviceConfig.updateDeviceId(context.applicationContext, newId)
+                binding.tvFarmName.text = DeviceConfig.currentDeviceId
             }
-        }
-        dialog.show(parentFragmentManager, "SettingsDialog")
+            .setNegativeButton("Cancel", null)
+            .show()
     }
-    
+
     private fun setupBottomNavigation() {
         binding.navDashboard.setOnClickListener {
+            // Already on dashboard
+            updateSelectedTab(R.id.nav_dashboard)
+        }
+        
+        binding.navCharts.setOnClickListener {
+            findNavController().navigate(R.id.action_dashboard_to_charts)
+            updateSelectedTab(R.id.nav_charts)
         }
         
         binding.navIrrigation.setOnClickListener {
             findNavController().navigate(R.id.action_dashboard_to_irrigation)
+            updateSelectedTab(R.id.nav_irrigation)
         }
         
         updateSelectedTab(R.id.nav_dashboard)
     }
     
     private fun updateSelectedTab(selectedId: Int) {
-        val tabs = listOf(R.id.nav_dashboard, R.id.nav_irrigation)
+        val tabs = listOf(R.id.nav_dashboard, R.id.nav_charts, R.id.nav_irrigation)
         
         tabs.forEach { tabId ->
             val tab = binding.root.findViewById<android.widget.LinearLayout>(tabId)
+            val icon = tab.getChildAt(0) as android.widget.ImageView
             val text = tab.getChildAt(1) as TextView
             
             if (tabId == selectedId) {
-                text.setTextColor(ContextCompat.getColor(requireContext(), R.color.button))
-                tab.getChildAt(0).alpha = 1.0f
+                text.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_primary))
+                icon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.text_primary))
+                icon.alpha = 1.0f
             } else {
-                text.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-                tab.getChildAt(0).alpha = 0.6f
+                text.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_tertiary))
+                icon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.text_tertiary))
+                icon.alpha = 1.0f
             }
         }
     }
@@ -240,6 +181,23 @@ class DashboardFragment : Fragment() {
             .withEndAction {
                 view.visibility = visibility
             }
+    }
+    
+    private fun formatLastUpdated(receivedTime: Long?): String {
+        if (receivedTime == null || receivedTime <= 0) {
+            return "Last updated: Never"
+        }
+        val now = System.currentTimeMillis()
+        val diff = now - receivedTime
+        val seconds = diff / 1000
+        val minutes = seconds / 60
+        
+        return when {
+            seconds < 10 -> "Last updated: Just now"
+            seconds < 60 -> "Last updated: ${seconds}s ago"
+            minutes < 60 -> "Last updated: ${minutes}m ago"
+            else -> "Last updated: ${minutes / 60}h ago"
+        }
     }
     
     override fun onDestroyView() {

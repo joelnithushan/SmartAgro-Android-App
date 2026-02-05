@@ -1,41 +1,55 @@
 package com.example.smartagro.data.firebase
 
 import android.util.Log
-import com.example.smartagro.data.firebase.DeviceRtdbPaths
-import com.example.smartagro.domain.model.rtdb.RelayCommand
-import com.example.smartagro.domain.model.rtdb.RelayControl
-import com.example.smartagro.domain.model.rtdb.RelayStatus
-import com.example.smartagro.domain.model.rtdb.RelayStatusUi
-import com.example.smartagro.domain.model.rtdb.RtdbRelay
 import com.example.smartagro.domain.model.rtdb.RtdbSensorLatest
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 
-class RtdbRepository(
-    private val auth: FirebaseAuth = FirebaseProvider.auth
-) {
-    private val database = FirebaseProvider.rtdb
+class RtdbRepository {
     private val TAG = "RtdbRepository"
 
+    private fun getDatabase(): FirebaseDatabase? = FirebaseProvider.rtdb
+
     fun observeSensorsLatest(deviceId: String): Flow<RtdbSensorLatest> = callbackFlow {
+        val db = getDatabase()
+        if (db == null) {
+            Log.w(TAG, "Firebase RTDB not initialized. Returning empty sensor data.")
+            trySend(RtdbSensorLatest())
+            close()
+            return@callbackFlow
+        }
+
         val path = DeviceRtdbPaths.sensorsLatest(deviceId)
-        val sensorsRef = database.getReference(path)
+        val ref = db.getReference(path)
 
         Log.d(TAG, "Observing sensors latest at path: $path")
 
         val listener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 try {
+                    if (!snapshot.exists()) {
+                        Log.w(TAG, "No data at path: $path (snapshot does not exist)")
+                        trySend(RtdbSensorLatest())
+                        return
+                    }
+                    
+                    val rawValue = snapshot.value
+                    Log.d(TAG, "Data received at $path: $rawValue")
+                    
                     val sensorData = snapshot.getValue(RtdbSensorLatest::class.java)
-                    val result = sensorData ?: RtdbSensorLatest()
-                    Log.d(TAG, "Sensor latest data received: $result")
-                    trySend(result)
+                    if (sensorData != null) {
+                        Log.d(TAG, "Parsed sensor data - soilMoisture: ${sensorData.soilMoisturePct}%, airTemp: ${sensorData.airTemperature}°C, timestamp: ${sensorData.timestamp}")
+                        trySend(sensorData)
+                    } else {
+                        Log.w(TAG, "Failed to parse sensor data from snapshot")
+                        trySend(RtdbSensorLatest())
+                    }
                 } catch (e: Exception) {
                     Log.e(TAG, "Error parsing sensor latest data", e)
                     trySend(RtdbSensorLatest())
@@ -48,25 +62,39 @@ class RtdbRepository(
             }
         }
 
-        sensorsRef.addValueEventListener(listener)
+        ref.addValueEventListener(listener)
 
         awaitClose {
             Log.d(TAG, "Removing sensor latest listener from path: $path")
-            sensorsRef.removeEventListener(listener)
+            ref.removeEventListener(listener)
         }
     }
 
     fun observeLastSeen(deviceId: String): Flow<Long?> = callbackFlow {
+        val db = getDatabase()
+        if (db == null) {
+            Log.w(TAG, "Firebase RTDB not initialized. Returning null lastSeen.")
+            trySend(null)
+            close()
+            return@callbackFlow
+        }
+
         val path = DeviceRtdbPaths.metaLastSeen(deviceId)
-        val lastSeenRef = database.getReference(path)
+        val ref = db.getReference(path)
 
         Log.d(TAG, "Observing lastSeen at path: $path")
 
         val listener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 try {
+                    if (!snapshot.exists()) {
+                        Log.w(TAG, "No data at path: $path (snapshot does not exist)")
+                        trySend(null)
+                        return
+                    }
+                    
                     val lastSeen = snapshot.getValue(Long::class.java)
-                    Log.d(TAG, "LastSeen received: $lastSeen")
+                    Log.d(TAG, "LastSeen received: $lastSeen at path: $path")
                     trySend(lastSeen)
                 } catch (e: Exception) {
                     Log.e(TAG, "Error parsing lastSeen", e)
@@ -80,89 +108,38 @@ class RtdbRepository(
             }
         }
 
-        lastSeenRef.addValueEventListener(listener)
+        ref.addValueEventListener(listener)
 
         awaitClose {
             Log.d(TAG, "Removing lastSeen listener from path: $path")
-            lastSeenRef.removeEventListener(listener)
+            ref.removeEventListener(listener)
         }
     }
 
-    fun observeRelayStatus(deviceId: String): Flow<RelayStatusUi> = callbackFlow {
-        val path = DeviceRtdbPaths.controlRelayStatus(deviceId)
-        val statusRef = database.getReference(path)
+    fun observeRelayStatus(deviceId: String): Flow<String?> = callbackFlow {
+        val db = getDatabase()
+        if (db == null) {
+            Log.w(TAG, "Firebase RTDB not initialized. Returning null relayStatus.")
+            trySend(null)
+            close()
+            return@callbackFlow
+        }
+
+        val path = DeviceRtdbPaths.controlsRelayStatus(deviceId)
+        val ref = db.getReference(path)
 
         Log.d(TAG, "Observing relay status at path: $path")
 
         val listener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 try {
-                    val relayStatus = RelayStatus.parse(snapshot)
-                    val uiStatus = RelayStatusUi.fromRelayStatus(relayStatus)
-                    Log.d(TAG, "Relay status received: $uiStatus")
-                    trySend(uiStatus)
+                    val status = snapshot.getValue(String::class.java)
+                    trySend(status)
                 } catch (e: Exception) {
                     Log.e(TAG, "Error parsing relay status", e)
-                    trySend(RelayStatusUi.fromRelayStatus(null))
-                }
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.e(TAG, "Relay status listener cancelled: ${error.message}")
-                close(error.toException())
-            }
-        }
-
-        statusRef.addValueEventListener(listener)
-
-        awaitClose {
-            Log.d(TAG, "Removing relay status listener from path: $path")
-            statusRef.removeEventListener(listener)
-        }
-    }
-
-    fun observeRelayControl(deviceId: String): Flow<RelayControl?> = callbackFlow {
-        val relayPath = DeviceRtdbPaths.controlRelay(deviceId)
-        val statusPath = DeviceRtdbPaths.controlRelayStatus(deviceId)
-        val relayRef = database.getReference(relayPath)
-        val statusRef = database.getReference(statusPath)
-
-        Log.d(TAG, "Observing relay control at path: $relayPath")
-
-        var relaySnapshot: DataSnapshot? = null
-        var statusSnapshot: DataSnapshot? = null
-
-        fun tryEmit() {
-            if (relaySnapshot != null && statusSnapshot != null) {
-                try {
-                    val rtdbRelay = relaySnapshot!!.getValue(RtdbRelay::class.java) ?: RtdbRelay()
-                    val control = RelayControl.fromRtdbRelay(rtdbRelay, statusSnapshot)
-                    Log.d(TAG, "Relay control received: $control")
-                    trySend(control)
-                } catch (e: Exception) {
-                    Log.e(TAG, "Error parsing relay control", e)
                     trySend(null)
                 }
             }
-        }
-
-        val relayListener = object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                relaySnapshot = snapshot
-                tryEmit()
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-                Log.e(TAG, "Relay control listener cancelled: ${error.message}")
-                close(error.toException())
-            }
-        }
-
-        val statusListener = object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                statusSnapshot = snapshot
-                tryEmit()
-            }
 
             override fun onCancelled(error: DatabaseError) {
                 Log.e(TAG, "Relay status listener cancelled: ${error.message}")
@@ -170,41 +147,28 @@ class RtdbRepository(
             }
         }
 
-        relayRef.addValueEventListener(relayListener)
-        statusRef.addValueEventListener(statusListener)
+        ref.addValueEventListener(listener)
 
         awaitClose {
-            Log.d(TAG, "Removing relay control listeners from paths: $relayPath, $statusPath")
-            relayRef.removeEventListener(relayListener)
-            statusRef.removeEventListener(statusListener)
+            Log.d(TAG, "Removing relay status listener from path: $path")
+            ref.removeEventListener(listener)
         }
     }
 
-    suspend fun writeRelayCommand(deviceId: String, command: String, mirrorStatus: Boolean = true) {
+    suspend fun setRelayCommand(deviceId: String, command: String) {
+        val db = getDatabase()
+        if (db == null) {
+            Log.w(TAG, "Firebase RTDB not initialized. Cannot write relay command.")
+            throw IllegalStateException("Firebase RTDB is not initialized. Please configure google-services.json")
+        }
+
         val path = DeviceRtdbPaths.controlsRelayCommand(deviceId)
-        val commandRef = database.getReference(path)
+        val ref = db.getReference(path)
 
         Log.d(TAG, "Writing relay command=$command to path: $path")
 
         try {
-            commandRef.setValue(command).await()
-            Log.d(TAG, "Relay command written successfully")
-
-            val currentUser = auth.currentUser
-            if (mirrorStatus && currentUser != null) {
-                val statusPath = DeviceRtdbPaths.controlRelayStatus(deviceId)
-                val statusRef = database.getReference(statusPath)
-
-                val statusPayload = mapOf(
-                    "value" to command,
-                    "requestedBy" to currentUser.uid,
-                    "requestedByEmail" to (currentUser.email ?: ""),
-                    "timestamp" to System.currentTimeMillis()
-                )
-
-                statusRef.setValue(statusPayload).await()
-                Log.d(TAG, "Relay status mirrored successfully")
-            }
+            ref.setValue(command).await()
         } catch (e: Exception) {
             Log.e(TAG, "Error writing relay command", e)
             throw e

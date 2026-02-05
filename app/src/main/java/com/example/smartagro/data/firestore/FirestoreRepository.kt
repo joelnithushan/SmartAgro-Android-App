@@ -13,13 +13,20 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 
 class FirestoreRepository(
-    private val firestore: FirebaseFirestore = FirebaseProvider.firestore
+    private val firestore: FirebaseFirestore? = FirebaseProvider.firestore
 ) {
     private val TAG = "FirestoreRepository"
 
     private val validStatuses = listOf("assigned", "device-assigned", "approved", "completed", "active")
 
     fun getUserActiveDeviceId(uid: String): Flow<String?> = callbackFlow {
+        if (firestore == null) {
+            Log.w(TAG, "Firestore not initialized. Returning null activeDeviceId.")
+            trySend(null)
+            close()
+            return@callbackFlow
+        }
+
         val userDocRef = firestore.collection(FirestorePaths.USERS).document(uid)
 
         Log.d(TAG, "Observing activeDeviceId for uid: $uid")
@@ -49,6 +56,13 @@ class FirestoreRepository(
     }
 
     fun getUserDevices(uid: String): Flow<List<UserDevice>> = callbackFlow {
+        if (firestore == null) {
+            Log.w(TAG, "Firestore not initialized. Returning empty device list.")
+            trySend(emptyList())
+            close()
+            return@callbackFlow
+        }
+
         val deviceRequestsRef = firestore.collection(FirestorePaths.DEVICE_REQUESTS)
             .whereEqualTo("userId", uid)
             .whereIn("status", validStatuses)
@@ -98,6 +112,11 @@ class FirestoreRepository(
     }
 
     suspend fun updateActiveDeviceId(uid: String, deviceId: String?) {
+        if (firestore == null) {
+            Log.w(TAG, "Firestore not initialized. Cannot update activeDeviceId.")
+            throw IllegalStateException("Firestore is not initialized. Please configure google-services.json")
+        }
+
         val userDocRef = firestore.collection(FirestorePaths.USERS).document(uid)
 
         Log.d(TAG, "Updating activeDeviceId=$deviceId for uid: $uid")

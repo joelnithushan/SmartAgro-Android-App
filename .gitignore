@@ -16,5 +16,5 @@ local.properties
 
 google-services.json
 
-PROJECT_ANALYSIS.md
-REFACTORING_SUMMARY.md
+# Exclude all markdown documentation files
+*.md

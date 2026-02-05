@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="8dp"
+    app:cardBackgroundColor="#30FFFFFF"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:minHeight="80dp">
+
+        <!-- Left Vertical Accent Bar -->
+        <View
+            android:id="@+id/view_accent_bar"
+            android:layout_width="5dp"
+            android:layout_height="match_parent"
+            android:minHeight="80dp"
+            android:background="@color/accent_air_temp" />
+
+        <!-- Circular Icon Container -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_icon_chip"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="28dp"
+            app:cardBackgroundColor="#40FFFFFF"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="#50FFFFFF">
+
+            <ImageView
+                android:id="@+id/iv_sensor_icon"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_air_temp"
+                android:scaleType="fitCenter"
+                android:padding="4dp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Center Content -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="start">
+
+            <!-- Sensor Title -->
+            <TextView
+                android:id="@+id/tv_sensor_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Air Temperature"
+                android:textColor="@color/text_primary"
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:ellipsize="end" />
+
+            <!-- Value and Unit -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_sensor_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="25.5"
+                    android:textColor="@color/text_primary"
+                    android:textSize="28sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_sensor_unit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:text="°C"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Right Status Pill Chip -->
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chip_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Normal"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="6dp"
+            app:chipBackgroundColor="@color/status_normal"
+            app:chipMinHeight="32dp"
+            app:chipCornerRadius="16dp"
+            app:chipStrokeWidth="0dp" />
+
+    </LinearLayout>
+
+</com.google.android.material.card.MaterialCardView>

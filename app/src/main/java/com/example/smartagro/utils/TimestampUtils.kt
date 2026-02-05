@@ -14,9 +14,9 @@ fun formatTimestamp(ts: Long?): String {
     val oneBillion = 1_000_000_000L
     val oneTrillion = 1_000_000_000_000L
 
+    // If it's device uptime (millis from ESP32), show "Just now" since we track it separately
     if (ts < oneBillion) {
-        val seconds = ts / 1000L
-        return "Device uptime: ${seconds}s"
+        return "Just now"
     }
 
     val epochMillis = if (ts < oneTrillion) ts * 1000L else ts
@@ -25,14 +25,13 @@ fun formatTimestamp(ts: Long?): String {
     val year2100 = 4102444800000L
 
     if (epochMillis !in year2000..year2100) {
-        val seconds = ts / 1000L
-        return "Device uptime: ${seconds}s"
+        return "Just now"
     }
 
     return try {
         readableFormatter.format(Instant.ofEpochMilli(epochMillis))
     } catch (_: Exception) {
-        "Unknown"
+        "Just now"
     }
 }
 

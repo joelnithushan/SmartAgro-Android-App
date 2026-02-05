@@ -18,8 +18,12 @@ object DeviceRtdbPaths {
 
     fun controlsRelayCommand(deviceId: String) = "$DEVICES/$deviceId/$CONTROLS/$RELAY_COMMAND"
 
+    fun controlsRelayStatus(deviceId: String) = "$DEVICES/$deviceId/$CONTROLS/$RELAY_STATUS"
+
     fun controlRelayStatus(deviceId: String) = "$DEVICES/$deviceId/$CONTROL/$RELAY/$STATUS"
 
     fun controlRelay(deviceId: String) = "$DEVICES/$deviceId/$CONTROL/$RELAY"
+
+    private const val RELAY_STATUS = "relayStatus"
 }
 

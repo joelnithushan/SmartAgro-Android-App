@@ -23,5 +23,6 @@ data class SensorCardData(
     val value: Double,
     val unit: String,
     val status: SensorStatus,
-    val iconResId: Int
+    val iconResId: Int,
+    val extra: String? = null
 )

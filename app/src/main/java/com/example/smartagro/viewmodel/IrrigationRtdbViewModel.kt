@@ -5,19 +5,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.smartagro.data.firebase.FirebaseProvider
 import com.example.smartagro.data.firebase.RtdbRepository
 import com.example.smartagro.domain.model.rtdb.RelayCommand
 import com.example.smartagro.domain.model.rtdb.RelayControl
 import com.example.smartagro.domain.model.rtdb.RelayStatusUi
-import kotlinx.coroutines.Job
+import com.example.smartagro.utils.DeviceConfig
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 
 data class IrrigationUiState(
@@ -29,7 +27,7 @@ data class IrrigationUiState(
 )
 
 class IrrigationRtdbViewModel(
-    private val rtdbRepository: RtdbRepository
+    private val rtdbRepository: RtdbRepository = RtdbRepository()
 ) : ViewModel() {
 
     private val TAG = "IrrigationRtdbViewModel"
@@ -46,59 +44,46 @@ class IrrigationRtdbViewModel(
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> = _errorMessage
 
-    private var observeJob: Job? = null
-
-    fun observe(deviceIdFlow: StateFlow<String?>) {
-        observeJob?.cancel()
-        observeJob = viewModelScope.launch {
-            deviceIdFlow
-                .filterNotNull()
-                .distinctUntilChanged()
-                .collect { deviceId ->
-                    subscribe(deviceId)
-                }
-        }
-    }
-
-    private fun subscribe(deviceId: String) {
+    init {
         viewModelScope.launch {
             _loading.postValue(true)
             _errorMessage.postValue(null)
-            _uiState.value = _uiState.value.copy(deviceId = deviceId)
 
-            combine(
-                rtdbRepository.observeSensorsLatest(deviceId),
-                rtdbRepository.observeRelayStatus(deviceId),
-                rtdbRepository.observeRelayControl(deviceId)
-            ) { sensorsLatest, relayStatusUi, relayControl ->
-                Triple(sensorsLatest, relayStatusUi, relayControl)
-            }
+            DeviceConfig.deviceIdFlow
+                .flatMapLatest { deviceId ->
+                    _uiState.value = _uiState.value.copy(deviceId = deviceId)
+                    combine(
+                        rtdbRepository.observeSensorsLatest(deviceId),
+                        rtdbRepository.observeRelayStatus(deviceId)
+                    ) { sensorsLatest, relayStatusString ->
+                        Pair(sensorsLatest, relayStatusString)
+                    }
+                }
                 .catch { e ->
                     Log.e(TAG, "Error observing irrigation streams", e)
                     _errorMessage.postValue(e.message ?: "Error loading irrigation status")
                     _loading.postValue(false)
                 }
-                .collect { (sensorsLatest, relayStatusUi, relayControl) ->
+                .collect { (sensorsLatest, relayStatusString) ->
                     val fromSensors = RelayCommand.fromRaw(sensorsLatest.relayStatus)
-                    val fromControlStatus = relayStatusUi.value
-                    val chosen = fromSensors ?: fromControlStatus
+                    val fromControls = RelayCommand.fromRaw(relayStatusString)
+                    val chosen = fromSensors ?: fromControls
 
                     val source = when {
                         fromSensors != null -> "sensors/latest.relayStatus"
-                        fromControlStatus != null -> "control/relay/status"
+                        fromControls != null -> "controls/relayStatus"
                         else -> "unknown"
                     }
 
-                    _uiState.value = IrrigationUiState(
-                        deviceId = deviceId,
+                    _uiState.value = _uiState.value.copy(
                         isOn = when (chosen) {
                             RelayCommand.ON -> true
                             RelayCommand.OFF -> false
                             null -> null
                         },
                         statusSource = source,
-                        relayStatusUi = relayStatusUi,
-                        relayControl = relayControl
+                        relayStatusUi = null,
+                        relayControl = null
                     )
                     _loading.postValue(false)
                 }
@@ -113,7 +98,7 @@ class IrrigationRtdbViewModel(
         _errorMessage.postValue(null)
         viewModelScope.launch {
             try {
-                rtdbRepository.writeRelayCommand(deviceId, command, mirrorStatus = mirrorStatus)
+                rtdbRepository.setRelayCommand(deviceId, command)
                 Log.d(TAG, "Relay command written: $command for deviceId=$deviceId")
             } catch (e: Exception) {
                 Log.e(TAG, "Error writing relay command", e)

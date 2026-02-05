@@ -4,27 +4,48 @@ import com.google.firebase.database.IgnoreExtraProperties
 
 @IgnoreExtraProperties
 data class RtdbSensorLatest(
-    val soilMoisturePercent: Double? = null,
-    val soilTempC: Double? = null,
-    val airTempC: Double? = null,
-    val humidityPercent: Double? = null,
-    val rainLevelPercent: Double? = null,
-    val gasPpm: Double? = null,
-    val lightPercent: Double? = null,
+    val soilMoistureRaw: Int? = null,
+    val soilMoisturePct: Int? = null,
+    val airTemperature: Double? = null,
+    val airHumidity: Double? = null,
+    val soilTemperature: Double? = null,
+    val airQualityIndex: Int? = null,
+    val gases: RtdbGasData? = null,
+    val lightDetected: Int? = null,
+    val rainLevelRaw: Int? = null,
+    val rainStatus: String? = null,
     val relayStatus: String? = null,
-    val updatedAt: Long? = null
+    val timestamp: Long? = null
 ) {
     fun toSnapshotDefaults(): com.example.smartagro.domain.model.SensorSnapshot {
+        val rainLevelPercent = rainLevelRaw?.let { raw ->
+            when {
+                raw > 3800 -> 0.0
+                raw < 3000 -> 100.0
+                else -> mapOf(3800.0 to 0.0, 3000.0 to 100.0).let { 
+                    val percent = ((3800.0 - raw) / 800.0) * 100.0
+                    percent.coerceIn(0.0, 100.0)
+                }
+            }
+        } ?: 0.0
+
+        val lightPercent = lightDetected?.let { 
+            if (it == 1) 100.0 else 0.0 
+        } ?: 0.0
+
         return com.example.smartagro.domain.model.SensorSnapshot(
-            soilMoisturePercent = soilMoisturePercent ?: 0.0,
-            soilTempC = soilTempC ?: 0.0,
-            airTempC = airTempC ?: 0.0,
-            humidityPercent = humidityPercent ?: 0.0,
-            rainLevelPercent = rainLevelPercent ?: 0.0,
-            gasPpm = gasPpm ?: 0.0,
-            lightPercent = lightPercent ?: 0.0,
-            updatedAt = updatedAt ?: 0L
+            soilMoisturePercent = soilMoisturePct?.toDouble() ?: 0.0,
+            soilTempC = soilTemperature ?: 0.0,
+            airTempC = airTemperature ?: 0.0,
+            humidityPercent = airHumidity ?: 0.0,
+            rainLevelPercent = rainLevelPercent,
+            gasPpm = gases?.co2?.toDouble() ?: 0.0,
+            lightPercent = lightPercent,
+            updatedAt = timestamp ?: 0L
         )
     }
+
+    fun getCO2Ppm(): Int = gases?.co2 ?: 0
+    fun getNH3Ppm(): Int = gases?.nh3 ?: 0
 }
 

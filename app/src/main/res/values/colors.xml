@@ -1,21 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Dark Theme Colors -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="background">#C9FFD4</color>
-    <color name="title_bar">#04AC58</color>
-    <color name="dash_views">#4CAF50</color>
-    <color name="button">#04AC58</color>
-    <color name="chatBackground">#F5F5F5</color>
-    <color name="text_color99">#333333</color>
-    <color name="text_color66">#666666</color>
-    <color name="text_color33">#2A2A2A</color>
-    <color name="text_color26">#2E7D32</color>
+    
+    <!-- Dark Background -->
+    <color name="background">#121212</color>
+    <color name="surface">#1E1E1E</color>
+    <color name="surface_variant">#2C2C2C</color>
+    
+    <!-- Cards -->
+    <color name="card_background">#252525</color>
+    <color name="card_background_glass">#40252525</color>
+    
+    <!-- Accent Colors for Each Sensor Parameter -->
+    <color name="accent_air_temp">#FF6B35</color>          <!-- Orange - Air Temperature -->
+    <color name="accent_humidity">#4A90E2</color>          <!-- Blue - Humidity -->
+    <color name="accent_soil_moisture">#7ED321</color>     <!-- Green - Soil Moisture -->
+    <color name="accent_soil_raw">#50E3C2</color>          <!-- Teal - Soil Moisture Raw -->
+    <color name="accent_soil_temp">#F5A623</color>         <!-- Yellow-Orange - Soil Temperature -->
+    <color name="accent_aqi">#D0021B</color>               <!-- Red - Air Quality Index -->
+    <color name="accent_co2">#9013FE</color>               <!-- Purple - CO2 -->
+    <color name="accent_nh3">#00D9FF</color>               <!-- Cyan - NH3 -->
+    <color name="accent_light">#F8E71C</color>             <!-- Yellow - Light -->
+    <color name="accent_rain">#4178BE</color>               <!-- Blue - Rain -->
+    <color name="accent_relay">#50C878</color>             <!-- Green - Relay/Pump -->
+    
+    <!-- Legacy Accent Colors (keeping for compatibility) -->
+    <color name="accent_temperature">#FF9800</color>
+    <color name="accent_soil">#FFC107</color>
+    <color name="accent_air_quality">#F44336</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#B3B3B3</color>
+    <color name="text_tertiary">#808080</color>
+    
+    <!-- Status Colors -->
     <color name="status_normal">#4CAF50</color>
     <color name="status_low">#FF9800</color>
     <color name="status_high">#F44336</color>
-    <color name="card_background">#FFFFFF</color>
-    <color name="divider">#E0E0E0</color>
-    <color name="skeleton">#F5F5F5</color>
+    <color name="status_poor">#F44336</color>
+    
+    <!-- Legacy (keeping for compatibility) -->
+    <color name="title_bar">#1E1E1E</color>
+    <color name="dash_views">#4CAF50</color>
+    <color name="button">#4CAF50</color>
+    <color name="chatBackground">#2C2C2C</color>
+    <color name="text_color99">#FFFFFF</color>
+    <color name="text_color66">#B3B3B3</color>
+    <color name="text_color33">#808080</color>
+    <color name="text_color26">#4CAF50</color>
+    <color name="divider">#404040</color>
+    <color name="skeleton">#2C2C2C</color>
+    <color name="icon_temperature">#FF9800</color>
+    <color name="icon_humidity">#2196F3</color>
+    <color name="icon_soil">#FFC107</color>
+    <color name="icon_air_quality">#F44336</color>
 
 </resources>

@@ -12,10 +12,18 @@ import kotlinx.coroutines.flow.callbackFlow
 import kotlinx.coroutines.tasks.await
 
 class FirebaseDataSource {
-    private val database = FirebaseProvider.rtdb
+    private fun getDatabase() = FirebaseProvider.rtdb
     private val TAG = "FirebaseDataSource"
     
     fun observeSensors(farmId: String): Flow<SensorSnapshot> = callbackFlow {
+        val database = getDatabase()
+        if (database == null) {
+            Log.w(TAG, "Firebase RTDB not initialized. Returning empty sensor data.")
+            trySend(SensorSnapshot())
+            close()
+            return@callbackFlow
+        }
+
         val path = FirebasePaths.sensorsPath(farmId)
         val sensorsRef = database.getReference(path)
         
@@ -49,6 +57,12 @@ class FirebaseDataSource {
     }
     
     suspend fun getSensors(farmId: String): SensorSnapshot {
+        val database = getDatabase()
+        if (database == null) {
+            Log.w(TAG, "Firebase RTDB not initialized. Returning empty sensor data.")
+            return SensorSnapshot()
+        }
+
         val path = FirebasePaths.sensorsPath(farmId)
         val sensorsRef = database.getReference(path)
         
@@ -67,6 +81,14 @@ class FirebaseDataSource {
     }
     
     fun observeIrrigation(farmId: String): Flow<IrrigationState> = callbackFlow {
+        val database = getDatabase()
+        if (database == null) {
+            Log.w(TAG, "Firebase RTDB not initialized. Returning empty irrigation state.")
+            trySend(IrrigationState())
+            close()
+            return@callbackFlow
+        }
+
         val path = FirebasePaths.irrigationPath(farmId)
         val irrigationRef = database.getReference(path)
         
@@ -100,6 +122,12 @@ class FirebaseDataSource {
     }
     
     suspend fun getIrrigation(farmId: String): IrrigationState {
+        val database = getDatabase()
+        if (database == null) {
+            Log.w(TAG, "Firebase RTDB not initialized. Returning empty irrigation state.")
+            return IrrigationState()
+        }
+
         val path = FirebasePaths.irrigationPath(farmId)
         val irrigationRef = database.getReference(path)
         
@@ -118,6 +146,12 @@ class FirebaseDataSource {
     }
     
     suspend fun setIrrigationOn(farmId: String, on: Boolean, changedBy: String) {
+        val database = getDatabase()
+        if (database == null) {
+            Log.w(TAG, "Firebase RTDB not initialized. Cannot set irrigation state.")
+            throw IllegalStateException("Firebase RTDB is not initialized. Please configure google-services.json")
+        }
+
         val path = FirebasePaths.irrigationPath(farmId)
         val irrigationRef = database.getReference(path)
         
@@ -138,6 +172,12 @@ class FirebaseDataSource {
     }
     
     suspend fun setMode(farmId: String, mode: String) {
+        val database = getDatabase()
+        if (database == null) {
+            Log.w(TAG, "Firebase RTDB not initialized. Cannot set mode.")
+            throw IllegalStateException("Firebase RTDB is not initialized. Please configure google-services.json")
+        }
+
         val path = FirebasePaths.irrigationPath(farmId)
         val irrigationRef = database.getReference(path)
         
@@ -153,6 +193,12 @@ class FirebaseDataSource {
     }
     
     suspend fun setThreshold(farmId: String, value: Double) {
+        val database = getDatabase()
+        if (database == null) {
+            Log.w(TAG, "Firebase RTDB not initialized. Cannot set threshold.")
+            throw IllegalStateException("Firebase RTDB is not initialized. Please configure google-services.json")
+        }
+
         val path = FirebasePaths.irrigationPath(farmId)
         val irrigationRef = database.getReference(path)
         

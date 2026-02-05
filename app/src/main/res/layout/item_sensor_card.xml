@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="@dimen/radius_md"
-    app:cardElevation="@dimen/elevation_sm"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
     app:cardBackgroundColor="@color/card_background">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="@dimen/space_lg">
+        android:padding="18dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,11 +21,11 @@
 
             <ImageView
                 android:id="@+id/iv_sensor_icon"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="@dimen/space_md"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="12dp"
                 android:src="@drawable/ic_soil_moisture"
-                android:tint="@color/text_color66" />
+                android:tint="@color/text_color99" />
 
             <TextView
                 android:id="@+id/tv_sensor_label"
@@ -34,8 +34,11 @@
                 android:layout_weight="1"
                 android:text="Soil Moisture"
                 android:textColor="@color/text_color99"
-                android:textSize="15sp"
-                android:textStyle="bold" />
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:singleLine="true" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_status"
@@ -44,15 +47,18 @@
                 android:text="Normal"
                 android:textSize="10sp"
                 android:textColor="@color/white"
-                android:paddingHorizontal="@dimen/space_sm"
-                app:chipBackgroundColor="@color/status_normal" />
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="2dp"
+                app:chipBackgroundColor="@color/status_normal"
+                app:chipMinHeight="20dp"
+                app:chipCornerRadius="10dp" />
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/space_sm"
+            android:layout_marginTop="16dp"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
@@ -63,7 +69,7 @@
                 android:layout_weight="1"
                 android:text="45.2"
                 android:textColor="@color/text_color99"
-                android:textSize="28sp"
+                android:textSize="34sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -72,10 +78,19 @@
                 android:layout_height="wrap_content"
                 android:text="%"
                 android:textColor="@color/text_color66"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:layout_marginStart="4dp" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_sensor_extra"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_xs"
+            android:textColor="@color/text_color66"
+            android:textSize="12sp"
+            android:visibility="gone" />
 
     </LinearLayout>
 

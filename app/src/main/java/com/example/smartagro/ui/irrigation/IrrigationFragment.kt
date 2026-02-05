@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -13,9 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.smartagro.R
 import com.example.smartagro.databinding.FragmentIrrigationBinding
-import com.example.smartagro.utils.DeviceViewModelFactory
 import com.example.smartagro.utils.formatTimestamp
-import com.example.smartagro.viewmodel.DeviceSelectionViewModel
 import com.example.smartagro.viewmodel.IrrigationRtdbViewModel
 import com.example.smartagro.viewmodel.IrrigationUiState
 import kotlinx.coroutines.launch
@@ -25,9 +24,7 @@ class IrrigationFragment : Fragment() {
     private var _binding: FragmentIrrigationBinding? = null
     private val binding get() = _binding!!
     
-    private val deviceFactory = DeviceViewModelFactory()
-    private val deviceSelectionViewModel: DeviceSelectionViewModel by viewModels { deviceFactory }
-    private val viewModel: IrrigationRtdbViewModel by viewModels { deviceFactory }
+    private val viewModel: IrrigationRtdbViewModel by viewModels()
     
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,9 +41,6 @@ class IrrigationFragment : Fragment() {
         setupObservers()
         setupClickListeners()
         setupBottomNavigation()
-
-        deviceSelectionViewModel.start()
-        viewModel.observe(deviceSelectionViewModel.selectedDeviceId)
     }
     
     private fun setupObservers() {
@@ -66,11 +60,8 @@ class IrrigationFragment : Fragment() {
         }
         
         viewModel.errorMessage.observe(viewLifecycleOwner) { error ->
-            if (error != null) {
-                animateViewVisibility(binding.errorState, View.VISIBLE)
-                binding.tvErrorMessage.text = error
-            } else {
-                animateViewVisibility(binding.errorState, View.GONE)
+            if (!error.isNullOrBlank()) {
+                Toast.makeText(requireContext(), error, Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -114,9 +105,7 @@ class IrrigationFragment : Fragment() {
     }
     
     private fun setupClickListeners() {
-        binding.btnRetry.setOnClickListener {
-            binding.errorState.visibility = View.GONE
-        }
+        binding.btnRetry.setOnClickListener { }
     }
     
     private fun showToggleConfirmation(turnOn: Boolean) {
@@ -124,6 +113,8 @@ class IrrigationFragment : Fragment() {
             .setTitle("Turn irrigation ${if (turnOn) "ON" else "OFF"}?")
             .setPositiveButton("Confirm") { _, _ ->
                 viewModel.writeRelay(turnOn, mirrorStatus = true)
+                val label = if (turnOn) "ON" else "OFF"
+                Toast.makeText(requireContext(), "Command sent: $label", Toast.LENGTH_SHORT).show()
             }
             .setNegativeButton("Cancel") { _, _ ->
                 val currentIsOn = viewModel.uiState.value.isOn
@@ -138,27 +129,38 @@ class IrrigationFragment : Fragment() {
     private fun setupBottomNavigation() {
         binding.navDashboard.setOnClickListener {
             findNavController().navigate(R.id.action_irrigation_to_dashboard)
+            updateSelectedTab(R.id.nav_dashboard)
+        }
+        
+        binding.navCharts.setOnClickListener {
+            findNavController().navigate(R.id.action_irrigation_to_charts)
+            updateSelectedTab(R.id.nav_charts)
         }
         
         binding.navIrrigation.setOnClickListener {
+            // Already on irrigation
+            updateSelectedTab(R.id.nav_irrigation)
         }
         
         updateSelectedTab(R.id.nav_irrigation)
     }
     
     private fun updateSelectedTab(selectedId: Int) {
-        val tabs = listOf(R.id.nav_dashboard, R.id.nav_irrigation)
+        val tabs = listOf(R.id.nav_dashboard, R.id.nav_charts, R.id.nav_irrigation)
         
         tabs.forEach { tabId ->
             val tab = binding.root.findViewById<android.widget.LinearLayout>(tabId)
+            val icon = tab.getChildAt(0) as android.widget.ImageView
             val text = tab.getChildAt(1) as TextView
             
             if (tabId == selectedId) {
-                text.setTextColor(ContextCompat.getColor(requireContext(), R.color.button))
-                tab.getChildAt(0).alpha = 1.0f
+                text.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_primary))
+                icon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.text_primary))
+                icon.alpha = 1.0f
             } else {
-                text.setTextColor(ContextCompat.getColor(requireContext(), R.color.black))
-                tab.getChildAt(0).alpha = 0.6f
+                text.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_tertiary))
+                icon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.text_tertiary))
+                icon.alpha = 1.0f
             }
         }
     }
