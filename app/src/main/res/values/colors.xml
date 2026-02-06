@@ -32,9 +32,14 @@
     <color name="accent_air_quality">#F44336</color>
     
     <!-- Text Colors -->
-    <color name="text_primary">#FFFFFF</color>
-    <color name="text_secondary">#B3B3B3</color>
+    <color name="text_primary">#D9FFFFFF</color> <!-- White with 85% alpha for high contrast -->
+    <color name="text_secondary">#A6FFFFFF</color> <!-- White with 65% alpha for units -->
     <color name="text_tertiary">#808080</color>
+    
+    <!-- Dark Text Colors for White Blurry Cards (bright and visible) -->
+    <color name="text_primary_dark">#FF212121</color> <!-- Dark gray/black for white background -->
+    <color name="text_secondary_dark">#FF424242</color> <!-- Medium gray for white background -->
+    <color name="text_value_dark">#FF000000</color> <!-- Pure black for values (bright and clear) -->
     
     <!-- Status Colors -->
     <color name="status_normal">#4CAF50</color>

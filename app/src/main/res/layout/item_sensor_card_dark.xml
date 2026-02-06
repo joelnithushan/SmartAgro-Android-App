@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.smartagro.ui.common.GlassCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -7,16 +7,19 @@
     android:layout_marginVertical="8dp"
     app:cardCornerRadius="24dp"
     app:cardElevation="8dp"
-    app:cardBackgroundColor="#30FFFFFF"
-    app:strokeWidth="0dp">
+    app:cardBackgroundColor="#40FFFFFF"
+    app:strokeWidth="1dp"
+    app:strokeColor="#40FFFFFF">
 
+    <!-- Content Layer - NO BLUR, stays sharp -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="16dp"
         android:gravity="center_vertical"
-        android:minHeight="80dp">
+        android:minHeight="80dp"
+        android:background="@null">
 
         <!-- Left Vertical Accent Bar -->
         <View
@@ -26,23 +29,23 @@
             android:minHeight="80dp"
             android:background="@color/accent_air_temp" />
 
-        <!-- Circular Icon Container -->
+        <!-- Circular Icon Container (premium size increase) -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_icon_chip"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            app:cardCornerRadius="28dp"
-            app:cardBackgroundColor="#40FFFFFF"
+            app:cardCornerRadius="31dp"
+            app:cardBackgroundColor="#25FFFFFF"
             app:cardElevation="0dp"
             app:strokeWidth="1dp"
-            app:strokeColor="#50FFFFFF">
+            app:strokeColor="#35FFFFFF">
 
             <ImageView
                 android:id="@+id/iv_sensor_icon"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_air_temp"
                 android:scaleType="fitCenter"
@@ -56,7 +59,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:gravity="start">
+            android:gravity="start"
+            android:background="@null">
 
             <!-- Sensor Title -->
             <TextView
@@ -116,4 +120,4 @@
 
     </LinearLayout>
 
-</com.google.android.material.card.MaterialCardView>
+</com.example.smartagro.ui.common.GlassCardView>

@@ -32,8 +32,9 @@ class SensorCardDarkAdapter : ListAdapter<SensorCardData, SensorCardDarkAdapter.
         val isOffline = card.extra == "Offline"
         val context = holder.itemView.context
 
-        // Set label
+        // Set label with white text for visibility on glass background (bright and clear)
         holder.binding.tvSensorLabel.text = card.label
+        holder.binding.tvSensorLabel.setTextColor(ContextCompat.getColor(context, R.color.text_primary))
 
         // Apply parameter-specific colors first
         val accentColorRes = SensorColorMapper.getAccentColorResId(card.label)
@@ -58,8 +59,10 @@ class SensorCardDarkAdapter : ListAdapter<SensorCardData, SensorCardDarkAdapter.
         } else {
             holder.binding.tvSensorValue.text = formatValue(card)
             holder.binding.tvSensorUnit.text = if (card.unit.isNotBlank()) card.unit else ""
-            // Set value text color to accent color for emphasis
+            // Set value text color to accent color for emphasis (bright and readable on glass background)
             holder.binding.tvSensorValue.setTextColor(accentColor)
+            // Set unit text color to white with alpha for visibility on glass background
+            holder.binding.tvSensorUnit.setTextColor(ContextCompat.getColor(context, R.color.text_secondary))
         }
 
         // Status pill chip with colored background

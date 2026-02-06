@@ -35,18 +35,18 @@ object SensorColorMapper {
      */
     fun getIconChipBackgroundColor(label: String): String {
         return when (label) {
-            "Air Temp" -> "#40FF6B35"      // Orange with transparency
-            "Humidity" -> "#404A90E2"      // Blue with transparency
-            "Soil Moisture" -> "#407ED321"  // Green with transparency
-            "Soil Moist Raw" -> "#4050E3C2" // Teal with transparency
-            "Soil Temp" -> "#40F5A623"      // Yellow-Orange with transparency
-            "AQI", "Air Quality" -> "#40D0021B" // Red with transparency
-            "CO2" -> "#409013FE"           // Purple with transparency
-            "NH3" -> "#4000D9FF"           // Cyan with transparency
-            "Light" -> "#40F8E71C"         // Yellow with transparency
-            "Rain" -> "#404178BE"          // Blue with transparency
-            "Relay" -> "#4050C878"         // Green with transparency
-            else -> "#40FF6B35"            // Default fallback
+            "Air Temp" -> "#50FF6B35"      // Orange with increased opacity (31% opacity) for white background
+            "Humidity" -> "#504A90E2"      // Blue with increased opacity
+            "Soil Moisture" -> "#507ED321"  // Green with increased opacity
+            "Soil Moist Raw" -> "#5050E3C2" // Teal with increased opacity
+            "Soil Temp" -> "#50F5A623"      // Yellow-Orange with increased opacity
+            "AQI", "Air Quality" -> "#50D0021B" // Red with increased opacity
+            "CO2" -> "#509013FE"           // Purple with increased opacity
+            "NH3" -> "#5000D9FF"           // Cyan with increased opacity
+            "Light" -> "#50F8E71C"         // Yellow with increased opacity
+            "Rain" -> "#504178BE"          // Blue with increased opacity
+            "Relay" -> "#5050C878"         // Green with increased opacity
+            else -> "#50FF6B35"            // Default fallback
         }
     }
     
@@ -56,18 +56,18 @@ object SensorColorMapper {
      */
     fun getCardStrokeColor(label: String): String {
         return when (label) {
-            "Air Temp" -> "#60FF6B35"      // Orange with more transparency
-            "Humidity" -> "#604A90E2"     // Blue with more transparency
-            "Soil Moisture" -> "#607ED321" // Green with more transparency
-            "Soil Moist Raw" -> "#6050E3C2" // Teal with more transparency
-            "Soil Temp" -> "#60F5A623"     // Yellow-Orange with more transparency
-            "AQI", "Air Quality" -> "#60D0021B" // Red with more transparency
-            "CO2" -> "#609013FE"          // Purple with more transparency
-            "NH3" -> "#6000D9FF"          // Cyan with more transparency
-            "Light" -> "#60F8E71C"        // Yellow with more transparency
-            "Rain" -> "#604178BE"         // Blue with more transparency
-            "Relay" -> "#6050C878"        // Green with more transparency
-            else -> "#60FF6B35"           // Default fallback
+            "Air Temp" -> "#40FF6B35"      // Orange with more transparency (40% opacity)
+            "Humidity" -> "#404A90E2"     // Blue with more transparency
+            "Soil Moisture" -> "#407ED321" // Green with more transparency
+            "Soil Moist Raw" -> "#4050E3C2" // Teal with more transparency
+            "Soil Temp" -> "#40F5A623"     // Yellow-Orange with more transparency
+            "AQI", "Air Quality" -> "#40D0021B" // Red with more transparency
+            "CO2" -> "#409013FE"          // Purple with more transparency
+            "NH3" -> "#4000D9FF"          // Cyan with more transparency
+            "Light" -> "#40F8E71C"        // Yellow with more transparency
+            "Rain" -> "#404178BE"         // Blue with more transparency
+            "Relay" -> "#4050C878"        // Green with more transparency
+            else -> "#40FF6B35"           // Default fallback
         }
     }
 }

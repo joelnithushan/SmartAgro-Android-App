@@ -97,13 +97,13 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <com.google.android.material.card.MaterialCardView
+            <com.example.smartagro.ui.common.GlassCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="8dp"
-                app:cardBackgroundColor="#30FFFFFF"
+                app:cardBackgroundColor="#40FFFFFF"
                 app:strokeWidth="1dp"
                 app:strokeColor="#40FFFFFF"
                 android:visibility="visible">
@@ -112,13 +112,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="20dp"
+                    android:background="@null">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:gravity="center_vertical">
+                        android:gravity="center_vertical"
+                        android:background="@null">
 
                         <TextView
                             android:layout_width="0dp"
@@ -171,15 +173,15 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </com.example.smartagro.ui.common.GlassCardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <com.example.smartagro.ui.common.GlassCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="8dp"
-                app:cardBackgroundColor="#30FFFFFF"
+                app:cardBackgroundColor="#40FFFFFF"
                 app:strokeWidth="1dp"
                 app:strokeColor="#40FFFFFF">
 
@@ -187,7 +189,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="20dp"
+                    android:background="@null">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -287,15 +290,15 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </com.example.smartagro.ui.common.GlassCardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <com.example.smartagro.ui.common.GlassCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="8dp"
-                app:cardBackgroundColor="#30FFFFFF"
+                app:cardBackgroundColor="#40FFFFFF"
                 app:strokeWidth="1dp"
                 app:strokeColor="#40FFFFFF">
 
@@ -303,7 +306,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="20dp"
+                    android:background="@null">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -333,9 +337,9 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </com.example.smartagro.ui.common.GlassCardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <com.example.smartagro.ui.common.GlassCardView
                 android:id="@+id/loading_state"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -378,9 +382,9 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </com.example.smartagro.ui.common.GlassCardView>
 
-            <com.google.android.material.card.MaterialCardView
+            <com.example.smartagro.ui.common.GlassCardView
                 android:id="@+id/error_state"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -438,7 +442,7 @@
 
                 </LinearLayout>
 
-            </com.google.android.material.card.MaterialCardView>
+            </com.example.smartagro.ui.common.GlassCardView>
 
         </LinearLayout>
 
